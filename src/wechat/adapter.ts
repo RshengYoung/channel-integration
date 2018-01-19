@@ -35,7 +35,11 @@ export class WechatClient extends Adapter {
         const url = `${this.uploadMediaUrl}access_token=${accessToken}&type=${type}`
         console.log("URL: ", url)
         const form = new FormData()
-        form.append("media", mediaBuffer)
+        form.append("media", mediaBuffer, {
+            filename: uuid.v4() + ".jpg",
+            contentType: 'image/jpeg',
+            knownLength: mediaBuffer.byteLength
+        })
         return axios.post(url, form, {
             headers: form.getHeaders()
         }).then(res => {
