@@ -2,6 +2,7 @@
     "name": "channel-integration",
     "version": "1.0.0",
     "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "scripts": {
         "test": "mocha -r ts-node/register test/*.spec.ts",
         "utClient": "mocha -r ts-node/register test/utClient.spec.ts",
