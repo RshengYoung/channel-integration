@@ -13,8 +13,9 @@ describe("Wechat", () => {
     it("Upload media", async() => {
         await wechat.uploadMedia("image", "https://storage.googleapis.com/paas-storage/3-2_dress.jpg").then(mediaId => {
             console.log(mediaId)
-        })
+        }).catch(error => console.log(error))
     })
+
 
 
 })

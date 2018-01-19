@@ -33,11 +33,16 @@ export class WechatClient extends Adapter {
         const mediaBuffer = await this.getBuffer(media)
         const accessToken = await this.getAccessToken()
         const url = `${this.uploadMediaUrl}access_token=${accessToken}&type=${type}`
+        console.log("URL: ", url)
         const form = new FormData()
         form.append("media", mediaBuffer)
         return axios.post(url, form, {
             headers: form.getHeaders()
-        }).then(res => res.data.media_id)
+        }).then(res => {
+            console.log(res.data)
+
+            return res.data.media_id as string
+        })
     }
 
     private getAccessToken(): Promise<string> {
@@ -53,7 +58,7 @@ export class WechatClient extends Adapter {
     }
 
     private getBuffer(media: string): Promise<Buffer> {
-        return axios.get(media, { responseType: "ArrayBuffer" }).then(buffer => Promise.resolve(buffer.data as Buffer))
+        return axios.get(media, { responseType: "arraybuffer" }).then(buffer => Promise.resolve(buffer.data))
     }
 
 }
