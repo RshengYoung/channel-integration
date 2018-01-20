@@ -60,12 +60,10 @@ clients.use(wechatClient)
 const message = {
     channel: "<Channel name>",
     receiver: "<User id>",
-    message: [
-        {
-            type: "<Message type>",
-            ...<Message object>
-        }
-    ]
+    message: {
+        type: "<Message type>",
+        ...<Message object>
+    }
 }
 
 clients.send(message)
