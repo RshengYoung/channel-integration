@@ -12,7 +12,7 @@ lineClient.send({
     channel: "wechat",
     receiver: "<User id>",
     message: {
-	    type: "text",
+	type: "text",
         text: "<Message text>"
     }
 })
