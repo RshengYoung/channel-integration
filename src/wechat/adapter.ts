@@ -5,6 +5,7 @@ import * as FormData from 'form-data'
 import fetch from 'node-fetch'
 
 import { Adapter } from '../interface'
+import { WechatParser } from './parser'
 import { Config, IntegrationMessage, ImageMessage, VideoMessage, AudioMessage } from '../model'
 import { Buffer } from 'buffer'
 
@@ -17,6 +18,7 @@ export class WechatClient extends Adapter {
 
     constructor(config: Config) {
         super(config)
+        this.parser = new WechatParser()
         this.cache = new Cache({ stdTTL: 7000, checkperiod: 0 })
     }
 
@@ -61,16 +63,17 @@ export class WechatClient extends Adapter {
     }
 
     private getAccessToken(): Promise<string> {
-        const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
-        const token = this.cache.get(this.config.id) as string
-        if (token)
-            return Promise.resolve(token as string)
-        return axios.get(url).then(result => {
-            const accessToken = result.data.access_token as string
-            // console.log("Set token: ", accessToken)
-            this.cache.set(this.config.id, accessToken)
-            return Promise.resolve(accessToken)
-        })
+        return Promise.resolve("6_kh0e5Ri-gZ9IWabsic98WrgkeErjstM0lPqgQ8seUQ5xjDHDpWpQC0FTh-vSUwBEWtsJZIgeCiEVfg_L5hpNZKVrN8hZOwr6AANxXc1iP65HSY06XYRnNy5q8hZNjFmgf-5g2PtCdjnuWe5PWUQaACALJF")
+        // const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
+        // const token = this.cache.get(this.config.id) as string
+        // if (token)
+        //     return Promise.resolve(token as string)
+        // return axios.get(url).then(result => {
+        //     const accessToken = result.data.access_token as string
+        //     // console.log("Set token: ", accessToken)
+        //     this.cache.set(this.config.id, accessToken)
+        //     return Promise.resolve(accessToken)
+        // })
     }
 
     private getBuffer(media: string): Promise<Buffer> {
@@ -79,17 +82,22 @@ export class WechatClient extends Adapter {
 
     private async formatUrltoMedia(integration: IntegrationMessage): Promise<IntegrationMessage> {
         const messageType = integration.message.type
+        const regex = new RegExp(/^http[s]?:\/\/[a-zA-Z0-9\-_\.\/]+$/)
         let format: any = integration
         if (messageType === "image") {
             const imageMessage = integration.message as ImageMessage
-            format.message.image = await this.uploadMedia("image", imageMessage.image)
+            if (regex.test(imageMessage.image))
+                format.message.image = await this.uploadMedia("image", imageMessage.image)
         } else if (messageType === "video") {
             const videoMessage = integration.message as VideoMessage
-            format.message.video.previewImage = await this.uploadMedia("thumb", videoMessage.video.previewImage)
-            format.message.video.videoUrl = await this.uploadMedia("video", videoMessage.video.videoUrl)
+            if (regex.test(videoMessage.video.previewImage))
+                format.message.video.previewImage = await this.uploadMedia("thumb", videoMessage.video.previewImage)
+            if (regex.test(videoMessage.video.videoUrl))
+                format.message.video.videoUrl = await this.uploadMedia("video", videoMessage.video.videoUrl)
         } else if (messageType === "audio") {
             const audioMessage = integration.message as AudioMessage
-            format.message.audio.audioUrl = await this.uploadMedia("voice", audioMessage.audio.audioUrl)
+            if (regex.test(audioMessage.audio.audioUrl))
+                format.message.audio.audioUrl = await this.uploadMedia("voice", audioMessage.audio.audioUrl)
         }
         return Promise.resolve(format as IntegrationMessage)
     }

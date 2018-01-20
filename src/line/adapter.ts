@@ -1,8 +1,8 @@
 import { Client } from '@line/bot-sdk'
 
 import { Adapter } from '../interface'
-import { Config, IntegrationMessage } from '../model'
 import { LineParser } from './parser'
+import { Config, IntegrationMessage } from '../model'
 
 export class LineClient extends Adapter {
     private client: Client
@@ -12,7 +12,7 @@ export class LineClient extends Adapter {
             channelSecret: config.secret,
             channelAccessToken: config.accessToken
         })
-        this.parser = new LineParser
+        this.parser = new LineParser()
     }
 
     send(message: IntegrationMessage): Promise<any> {
