@@ -9,7 +9,8 @@ export declare class WechatClient extends Adapter {
     constructor(config: Config);
     send(message: IntegrationMessage): Promise<any>;
     serviceName(): string;
-    uploadMedia(type: "image" | "voice" | "video" | "thumb", media: string): Promise<string>;
+    uploadMedia(type: "image" | "voice" | "video" | "thumb", mediaUrl: string): Promise<string>;
     private getAccessToken();
     private getBuffer(media);
+    private formatUrltoMedia(integration);
 }

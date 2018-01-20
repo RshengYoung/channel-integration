@@ -16,15 +16,12 @@ export class LineClient extends Adapter {
     }
 
     send(message: IntegrationMessage): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.parser.format(message).then(lineMessages => {
-                this.client.pushMessage(message.receiver, lineMessages).then(() => {
-                    resolve({ status: "ok" })
-                }).catch(err => {
-                    reject({ status: "error", message: err })
-                })
-            }).catch(error => reject({ status: "error", message: error }))
-        })
+        return this.parser.format(message)
+            .then(lineMessages => {
+                return this.client.pushMessage(message.receiver, lineMessages)
+                    .then(() => Promise.resolve({ status: "ok" }))
+                    .catch(error => Promise.reject({ status: "error", message: error }))
+            })
     }
 
     serviceName(): string {

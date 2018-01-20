@@ -2,12 +2,11 @@ import axios from 'axios'
 import * as Cache from 'node-cache'
 import * as uuid from 'uuid'
 import * as FormData from 'form-data'
-import * as fs from 'fs'
 import fetch from 'node-fetch'
 
 import { Adapter } from '../interface'
-import { Config, IntegrationMessage } from '../model'
-import { Buffer } from 'buffer';
+import { Config, IntegrationMessage, ImageMessage, VideoMessage, AudioMessage } from '../model'
+import { Buffer } from 'buffer'
 
 export class WechatClient extends Adapter {
     private cache: Cache
@@ -19,18 +18,23 @@ export class WechatClient extends Adapter {
     constructor(config: Config) {
         super(config)
         this.cache = new Cache({ stdTTL: 7000, checkperiod: 0 })
-        this.getAccessToken()
     }
 
-    send(message: IntegrationMessage): Promise<any> {
-        return Promise.resolve()
+    async send(message: IntegrationMessage): Promise<any> {
+        const formatToMedia = await this.formatUrltoMedia(message)
+        const formatToWechat = await this.parser.format(formatToMedia)
+        const accessToken = await this.getAccessToken()
+        const url = `${this.sendMessageUrl}access_token=${accessToken}`
+        return axios.post(url, formatToWechat)
+            .then(() => Promise.resolve({ status: "ok" }))
+            .catch(error => Promise.reject({ status: "error", message: error }))
     }
 
     serviceName(): string {
         return "wechat"
     }
 
-    async uploadMedia(type: "image" | "voice" | "video" | "thumb", mediaUrl: string/*Media URL*/): Promise<string> {
+    async uploadMedia(type: "image" | "voice" | "video" | "thumb", mediaUrl: string): Promise<string> {
         const split = mediaUrl.split(".")
         const fileType = split[split.length - 1]
 
@@ -45,34 +49,49 @@ export class WechatClient extends Adapter {
         return fetch(url, {
             method: "post",
             body: form,
-            headers: form.getHeaders(),
-            timeout: 100000
+            headers: form.getHeaders()//,
+            // timeout: 100000
         }).then(res => {
             return res.json().then(result => {
-                // console.log("result: ", result)
                 const mediaId = (result.media_id || result.thumb_media_id) as string
+                // console.log("MediaId: ", mediaId)
                 return Promise.resolve(mediaId)
             })
         })
     }
 
     private getAccessToken(): Promise<string> {
-        return Promise.resolve("6_XtEoTexNZJoTHVqB5l5SjLuOBxNLGzq1etCss-a5TFNjs_tIKbkqlnbwH47V_X9RdyqUD5rwvsns8gcLV3XSJbMkhsa2yNhdv8t4OmQFTlNbLMAl7OCU9gPRXpa-0medBMQNP42vzr9S2Z_bHDAdAEAOKH")
-
-        // const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
-        // const token = this.cache.get(this.config.id)
-        // if (token)
-        //     return Promise.resolve(token as string)
-        // return axios.get(url).then(result => {
-        //     console.log("Set token")
-        //     const accessToken = result.data.access_token as string
-        //     this.cache.set(this.config.id, accessToken)
-        //     return Promise.resolve(accessToken)
-        // })
+        const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
+        const token = this.cache.get(this.config.id) as string
+        if (token)
+            return Promise.resolve(token as string)
+        return axios.get(url).then(result => {
+            const accessToken = result.data.access_token as string
+            // console.log("Set token: ", accessToken)
+            this.cache.set(this.config.id, accessToken)
+            return Promise.resolve(accessToken)
+        })
     }
 
     private getBuffer(media: string): Promise<Buffer> {
         return axios.get(media, { responseType: "arraybuffer" }).then(res => new Buffer(res.data))
+    }
+
+    private async formatUrltoMedia(integration: IntegrationMessage): Promise<IntegrationMessage> {
+        const messageType = integration.message.type
+        let format: any = integration
+        if (messageType === "image") {
+            const imageMessage = integration.message as ImageMessage
+            format.message.image = await this.uploadMedia("image", imageMessage.image)
+        } else if (messageType === "video") {
+            const videoMessage = integration.message as VideoMessage
+            format.message.video.previewImage = await this.uploadMedia("thumb", videoMessage.video.previewImage)
+            format.message.video.videoUrl = await this.uploadMedia("video", videoMessage.video.videoUrl)
+        } else if (messageType === "audio") {
+            const audioMessage = integration.message as AudioMessage
+            format.message.audio.audioUrl = await this.uploadMedia("voice", audioMessage.audio.audioUrl)
+        }
+        return Promise.resolve(format as IntegrationMessage)
     }
 
 }

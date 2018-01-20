@@ -10,16 +10,47 @@ import { IntegrationMessage } from '../src/model';
 describe("Line", () => {
     const line: Adapter = new LineClient(LINE)
 
-    it("send text", async () => {
+    it("Send text", async () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
+            message: {
+                type: "text",
+                text: "Text Message"
+            }
+        }
+
+        await line.send(message).then(response => {
+            expect(response.status).equal("ok")
+        })
+    })
+    
+    it("Send sticker", async () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
+            message: {
+                type: "sticker",
+                sticker: {
+                    packageId: "1",
+                    stickerId: "1"
                 }
-            ]
+            }
+        }
+
+        await line.send(message).then(response => {
+            expect(response.status).equal("ok")
+        })
+    })
+
+    it("Send image", async () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
+            message: {
+                type: "image",
+                image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+            }
         }
 
         await line.send(message).then(response => {
@@ -28,20 +59,19 @@ describe("Line", () => {
 
     })
 
-    it("send image", async () => {
+    it("Send video", async () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                },
-                {
-                    type: "image",
-                    image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+            message: {
+                type: "video",
+                video: {
+                    title: "Video Test",
+                    description: "Video Description",
+                    previewImage: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg",
+                    videoUrl: "https://storage.googleapis.com/paas-storage/video/1-2_drink.mp4"
                 }
-            ]
+            }
         }
 
         await line.send(message).then(response => {
@@ -50,29 +80,17 @@ describe("Line", () => {
 
     })
 
-    it("send video", async () => {
+    it("Send audio", async () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                },
-                {
-                    type: "image",
-                    image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
-                },
-                {
-                    type: "video",
-                    video: {
-                        title: "Video Test",
-                        description: "Video Description",
-                        previewImage: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg",
-                        videoUrl: "https://storage.googleapis.com/paas-storage/video/1-2_drink.mp4"
-                    }
+            message: {
+                type: "audio",
+                audio: {
+                    audioUrl: "https://storage.googleapis.com/paas-storage/audio/1-2_drink.m4a",
+                    duration: 2000
                 }
-            ]
+            }
         }
 
         await line.send(message).then(response => {
@@ -81,49 +99,11 @@ describe("Line", () => {
 
     })
 
-    it("send audio", async () => {
+    it("Send template buttons", async () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                },
-                {
-                    type: "image",
-                    image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
-                },
-                {
-                    type: "video",
-                    video: {
-                        title: "Video Test",
-                        description: "Video Description",
-                        previewImage: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg",
-                        videoUrl: "https://storage.googleapis.com/paas-storage/video/1-2_drink.mp4"
-                    }
-                },
-                {
-                    type: "audio",
-                    audio: {
-                        audioUrl: "https://storage.googleapis.com/paas-storage/audio/1-2_drink.m4a",
-                        duration: 2000
-                    }
-                }
-            ]
-        }
-
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
-
-    })
-
-    it("send template buttons", async() => {
-        const message: IntegrationMessage = {
-            channel: "line",
-            receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [{
+            message: {
                 type: "template",
                 description: "This is a buttons template",
                 template: {
@@ -153,7 +133,7 @@ describe("Line", () => {
                         }
                     ]
                 }
-            }]
+            }
         }
 
         await line.send(message).then(response => {
@@ -161,11 +141,11 @@ describe("Line", () => {
         })
     })
 
-    it("send template confirm", async() => {
+    it("Send template confirm", async () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [{
+            message: {
                 type: "template",
                 description: "This is a confirm template",
                 template: {
@@ -184,7 +164,7 @@ describe("Line", () => {
                         }
                     ]
                 }
-            }]
+            }
         }
 
         await line.send(message).then(response => {
@@ -192,11 +172,11 @@ describe("Line", () => {
         })
     })
 
-    it("send template carousel", async () => {
+    it("Send template carousel", async () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [{
+            message: {
                 type: "template",
                 description: "This is a carousel template",
                 template: {
@@ -248,7 +228,7 @@ describe("Line", () => {
                         }
                     ]
                 }
-            }]
+            }
         }
 
         await line.send(message).then(response => {

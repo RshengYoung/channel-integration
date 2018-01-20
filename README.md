@@ -33,7 +33,7 @@ const clients = new bot.Client([lineClient])
 ```
 or
 ```ts
-import { Client, LineClient, WechatClient } from 'channel-integration'
+import { Client, LineClient, WechatClient } from "channel-integration"
 const lineClient = new Client({
     id: "<Channel id>",
     secret: "<Channel secret>",

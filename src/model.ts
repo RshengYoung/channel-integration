@@ -10,7 +10,7 @@ export type Config = {
 export type IntegrationMessage = {
     channel: "line" | "wechat"
     receiver: string
-    message: [TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage]
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage
 }
 
 // export type LineMessage = {
@@ -67,7 +67,7 @@ export type StickerMessage = {
     type: "sticker"
     sticker: {
         packageId: string
-        stickerID: string
+        stickerId: string
     }
 }
 

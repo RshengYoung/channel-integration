@@ -6,7 +6,10 @@
     "scripts": {
         "test": "mocha -r ts-node/register test/*.spec.ts",
         "utClient": "mocha -r ts-node/register test/utClient.spec.ts",
-        "utWechatParser": "mocha -r ts-node/register test/utWechatAdapter.spec.ts"
+        "utLineAdapter": "mocha -r ts-node/register test/utLineAdapter.spec.ts",
+        "utLineParser": "mocha -r ts-node/register test/utLineParser.spec.ts",
+        "utWechatAdapter": "mocha -r ts-node/register test/utWechatAdapter.spec.ts",
+        "utWechatParser": "mocha -r ts-node/register test/utWechatParser.spec.ts"
     },
     "dependencies": {
         "@line/bot-sdk": "^5.2.0",

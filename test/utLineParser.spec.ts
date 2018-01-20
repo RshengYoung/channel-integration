@@ -12,22 +12,14 @@ describe("LineParaer", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [
-                {
-                    type: "text",
-                    text: "Line Test Message...1"
-                },
-                {
-                    type: "text",
-                    text: "Line Test Message...2"
-                }
-            ]
+            message: {
+                type: "text",
+                text: "Line Test Message"
+            }
         }
         parser.format(message).then(lineMessage => {
-            expect(lineMessage[0].type).equal("text")
-            expect(lineMessage[0].text).equal("Line Test Message...1")
-            expect(lineMessage[1].type).equal("text")
-            expect(lineMessage[1].text).equal("Line Test Message...2")
+            expect(lineMessage.type).equal("text")
+            expect(lineMessage.text).equal("Line Test Message")
         })
 
     })
@@ -36,111 +28,75 @@ describe("LineParaer", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                },
-                {
-                    type: "image",
-                    image: "https://demo.image.url/sample.jpg"
-                }
-            ]
+            message: {
+                type: "image",
+                image: "https://demo.image.url/sample.jpg"
+            }
         }
         parser.format(message).then(lineMessage => {
-            expect(lineMessage[0].type).equal("text")
-            expect(lineMessage[0].text).equal("Text1")
-    
-            expect(lineMessage[1].type).equal("image")
-            expect(lineMessage[1].originalContentUrl).equal("https://demo.image.url/sample.jpg")
-            expect(lineMessage[1].previewImageUrl).equal("https://demo.image.url/sample.jpg")
-        })        
+            expect(lineMessage.type).equal("image")
+            expect(lineMessage.originalContentUrl).equal("https://demo.image.url/sample.jpg")
+            expect(lineMessage.previewImageUrl).equal("https://demo.image.url/sample.jpg")
+        })
+    })
+
+    it("Sticker Message format()", () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "Uc6af6c3......",
+            message: {
+                type: "sticker",
+                sticker: {
+                    packageId: "1",
+                    stickerId: "1"
+                }
+            }
+        }
+        parser.format(message).then(lineMessage => {
+            expect(lineMessage.type).equal("sticker")
+            expect(lineMessage.packageId).equal("1")
+            expect(lineMessage.stickerId).equal("1")
+        })
+
     })
 
     it("Video Message format()", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                },
-                {
-                    type: "image",
-                    image: "https://demo.image.url/sample.jpg"
-                },
-                {
-                    type: "video",
-                    video: {
-                        title: "Video Test",
-                        description: "Video Description",
-                        previewImage: "https://previewImage.image/sample.jpg",
-                        videoUrl: "https://demo.video.url/sample.mp4"
-                    }
+            message: {
+                type: "video",
+                video: {
+                    title: "Video Test",
+                    description: "Video Description",
+                    previewImage: "https://previewImage.image/sample.jpg",
+                    videoUrl: "https://demo.video.url/sample.mp4"
                 }
-            ]
+            }
         }
         parser.format(message).then(lineMessage => {
-            expect(lineMessage[0].type).equal("text")
-            expect(lineMessage[0].text).equal("Text1")
-    
-            expect(lineMessage[1].type).equal("image")
-            expect(lineMessage[1].originalContentUrl).equal("https://demo.image.url/sample.jpg")
-            expect(lineMessage[1].previewImageUrl).equal("https://demo.image.url/sample.jpg")
-    
-            expect(lineMessage[2].type).equal("video")
-            expect(lineMessage[2].originalContentUrl).equal("https://demo.video.url/sample.mp4")
-            expect(lineMessage[2].previewImageUrl).equal("https://previewImage.image/sample.jpg")
-        })        
+            expect(lineMessage.type).equal("video")
+            expect(lineMessage.originalContentUrl).equal("https://demo.video.url/sample.mp4")
+            expect(lineMessage.previewImageUrl).equal("https://previewImage.image/sample.jpg")
+        })
     })
 
     it("Audio Message format()", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                },
-                {
-                    type: "image",
-                    image: "https://demo.image.url/sample.jpg"
-                },
-                {
-                    type: "video",
-                    video: {
-                        title: "Video Test",
-                        description: "Video Description",
-                        previewImage: "https://previewImage.image/sample.jpg",
-                        videoUrl: "https://demo.video.url/sample.mp4"
-                    }
-                },
-                {
-                    type: "audio",
-                    audio: {
-                        audioUrl: "https://demo.audio.url/sample.mp3",
-                        duration: 123456
-                    }
+            message: {
+                type: "audio",
+                audio: {
+                    audioUrl: "https://demo.audio.url/sample.mp3",
+                    duration: 123456
                 }
-            ]
+            }
         }
         parser.format(message).then(lineMessage => {
-            expect(lineMessage[0].type).equal("text")
-            expect(lineMessage[0].text).equal("Text1")
-    
-            expect(lineMessage[1].type).equal("image")
-            expect(lineMessage[1].originalContentUrl).equal("https://demo.image.url/sample.jpg")
-            expect(lineMessage[1].previewImageUrl).equal("https://demo.image.url/sample.jpg")
-    
-            expect(lineMessage[2].type).equal("video")
-            expect(lineMessage[2].originalContentUrl).equal("https://demo.video.url/sample.mp4")
-            expect(lineMessage[2].previewImageUrl).equal("https://previewImage.image/sample.jpg")
-    
-            expect(lineMessage[3].type).equal("audio")
-            expect(lineMessage[3].originalContentUrl).equal("https://demo.audio.url/sample.mp3")
-            expect(lineMessage[3].duration).equal(123456)
+            expect(lineMessage.type).equal("audio")
+            expect(lineMessage.originalContentUrl).equal("https://demo.audio.url/sample.mp3")
+            expect(lineMessage.duration).equal(123456)
         })
     })
 
@@ -148,7 +104,7 @@ describe("LineParaer", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [{
+            message: {
                 type: "template",
                 description: "This is a buttons template",
                 template: {
@@ -178,39 +134,39 @@ describe("LineParaer", () => {
                         }
                     ]
                 }
-            }]
+            }
         }
 
         parser.format(message).then(lineMessage => {
-            expect(lineMessage[0].type).equal("template")
-            expect(lineMessage[0].altText).equal("This is a buttons template")
-            expect(lineMessage[0].template.type).equal("buttons")
-            expect(lineMessage[0].template.thumbnailImageUrl).equal("https://demo.image.url/sample.jpg")
-            expect(lineMessage[0].template.imageAspectRatio).equal("rectangle")
-            expect(lineMessage[0].template.imageSize).equal("cover")
-            expect(lineMessage[0].template.imageBackgroundColor).equal("#ffffff")
-            expect(lineMessage[0].template.title).equal("Demo")
-            expect(lineMessage[0].template.text).equal("Please select")
-            expect(lineMessage[0].template.actions[0].type).equal("postback")
-            expect(lineMessage[0].template.actions[0].label).equal("B1")
-            expect(lineMessage[0].template.actions[0].data).equal("action=b1")
-            expect(lineMessage[0].template.actions[0].text).equal("This is B1")
-    
-            expect(lineMessage[0].template.actions[1].type).equal("message")
-            expect(lineMessage[0].template.actions[1].label).equal("B2")
-            expect(lineMessage[0].template.actions[1].text).equal("This is B2")
-    
-            expect(lineMessage[0].template.actions[2].type).equal("uri")
-            expect(lineMessage[0].template.actions[2].label).equal("B3")
-            expect(lineMessage[0].template.actions[2].uri).equal("https://demo.url/sample")  
-        })        
+            expect(lineMessage.type).equal("template")
+            expect(lineMessage.altText).equal("This is a buttons template")
+            expect(lineMessage.template.type).equal("buttons")
+            expect(lineMessage.template.thumbnailImageUrl).equal("https://demo.image.url/sample.jpg")
+            expect(lineMessage.template.imageAspectRatio).equal("rectangle")
+            expect(lineMessage.template.imageSize).equal("cover")
+            expect(lineMessage.template.imageBackgroundColor).equal("#ffffff")
+            expect(lineMessage.template.title).equal("Demo")
+            expect(lineMessage.template.text).equal("Please select")
+            expect(lineMessage.template.actions[0].type).equal("postback")
+            expect(lineMessage.template.actions[0].label).equal("B1")
+            expect(lineMessage.template.actions[0].data).equal("action=b1")
+            expect(lineMessage.template.actions[0].text).equal("This is B1")
+
+            expect(lineMessage.template.actions[1].type).equal("message")
+            expect(lineMessage.template.actions[1].label).equal("B2")
+            expect(lineMessage.template.actions[1].text).equal("This is B2")
+
+            expect(lineMessage.template.actions[2].type).equal("uri")
+            expect(lineMessage.template.actions[2].label).equal("B3")
+            expect(lineMessage.template.actions[2].uri).equal("https://demo.url/sample")
+        })
     })
 
     it("Confirm Template Message format()", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [{
+            message: {
                 type: "template",
                 description: "This is a confirm template",
                 template: {
@@ -229,22 +185,22 @@ describe("LineParaer", () => {
                         }
                     ]
                 }
-            }]
+            }
         }
 
-        parser.format(message).then(lineMessage=> {
-            expect(lineMessage[0].type).equal("template")
-            expect(lineMessage[0].altText).equal("This is a confirm template")
-            expect(lineMessage[0].template.type).equal("confirm")
-            expect(lineMessage[0].template.text).equal("Yes or no")
-    
-            expect(lineMessage[0].template.actions[0].type).equal("message")
-            expect(lineMessage[0].template.actions[0].label).equal("Yes")
-            expect(lineMessage[0].template.actions[0].text).equal("yes")
-    
-            expect(lineMessage[0].template.actions[1].type).equal("message")
-            expect(lineMessage[0].template.actions[1].label).equal("No")
-            expect(lineMessage[0].template.actions[1].text).equal("no")    
+        parser.format(message).then(lineMessage => {
+            expect(lineMessage.type).equal("template")
+            expect(lineMessage.altText).equal("This is a confirm template")
+            expect(lineMessage.template.type).equal("confirm")
+            expect(lineMessage.template.text).equal("Yes or no")
+
+            expect(lineMessage.template.actions[0].type).equal("message")
+            expect(lineMessage.template.actions[0].label).equal("Yes")
+            expect(lineMessage.template.actions[0].text).equal("yes")
+
+            expect(lineMessage.template.actions[1].type).equal("message")
+            expect(lineMessage.template.actions[1].label).equal("No")
+            expect(lineMessage.template.actions[1].text).equal("no")
         })
     })
 
@@ -252,7 +208,7 @@ describe("LineParaer", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "Uc6af6c3......",
-            message: [{
+            message: {
                 type: "template",
                 description: "This is a carousel template",
                 template: {
@@ -304,37 +260,37 @@ describe("LineParaer", () => {
                         }
                     ]
                 }
-            }]
+            }
         }
 
         parser.format(message).then(lineMessage => {
-            expect(lineMessage[0].type).equal("template")
-            expect(lineMessage[0].altText).equal("This is a carousel template")
-            expect(lineMessage[0].template.type).equal("carousel")
-    
-            expect(lineMessage[0].template.columns[0].thumbnailImageUrl).equal("https://example.com/bot/images/item1.jpg")
-            expect(lineMessage[0].template.columns[0].title).equal("this is menu1")
-            expect(lineMessage[0].template.columns[0].text).equal("description1")
-            expect(lineMessage[0].template.columns[0].actions[0].type).equal("postback")
-            expect(lineMessage[0].template.columns[0].actions[0].label).equal("Buy1")
-            expect(lineMessage[0].template.columns[0].actions[0].data).equal("action=buy&itemid=111")
-            expect(lineMessage[0].template.columns[0].actions[1].type).equal("message")
-            expect(lineMessage[0].template.columns[0].actions[1].label).equal("Add to cart1")
-            expect(lineMessage[0].template.columns[0].actions[1].text).equal("Message1")
-            expect(lineMessage[0].template.columns[0].actions[2].type).equal("uri")
-            expect(lineMessage[0].template.columns[0].actions[2].label).equal("View detail1")
-            expect(lineMessage[0].template.columns[0].actions[2].uri).equal("http://example.com/page/111")
-    
-            expect(lineMessage[0].template.columns[1].actions[0].type).equal("postback")
-            expect(lineMessage[0].template.columns[1].actions[0].label).equal("Buy2")
-            expect(lineMessage[0].template.columns[1].actions[0].data).equal("action=buy&itemid=111")
-            expect(lineMessage[0].template.columns[1].actions[1].type).equal("message")
-            expect(lineMessage[0].template.columns[1].actions[1].label).equal("Add to cart2")
-            expect(lineMessage[0].template.columns[1].actions[1].text).equal("Message2")
-            expect(lineMessage[0].template.columns[1].actions[2].type).equal("uri")
-            expect(lineMessage[0].template.columns[1].actions[2].label).equal("View detail2")
-            expect(lineMessage[0].template.columns[1].actions[2].uri).equal("http://example.com/page/111")
-        })        
+            expect(lineMessage.type).equal("template")
+            expect(lineMessage.altText).equal("This is a carousel template")
+            expect(lineMessage.template.type).equal("carousel")
+
+            expect(lineMessage.template.columns[0].thumbnailImageUrl).equal("https://example.com/bot/images/item1.jpg")
+            expect(lineMessage.template.columns[0].title).equal("this is menu1")
+            expect(lineMessage.template.columns[0].text).equal("description1")
+            expect(lineMessage.template.columns[0].actions[0].type).equal("postback")
+            expect(lineMessage.template.columns[0].actions[0].label).equal("Buy1")
+            expect(lineMessage.template.columns[0].actions[0].data).equal("action=buy&itemid=111")
+            expect(lineMessage.template.columns[0].actions[1].type).equal("message")
+            expect(lineMessage.template.columns[0].actions[1].label).equal("Add to cart1")
+            expect(lineMessage.template.columns[0].actions[1].text).equal("Message1")
+            expect(lineMessage.template.columns[0].actions[2].type).equal("uri")
+            expect(lineMessage.template.columns[0].actions[2].label).equal("View detail1")
+            expect(lineMessage.template.columns[0].actions[2].uri).equal("http://example.com/page/111")
+
+            expect(lineMessage.template.columns[1].actions[0].type).equal("postback")
+            expect(lineMessage.template.columns[1].actions[0].label).equal("Buy2")
+            expect(lineMessage.template.columns[1].actions[0].data).equal("action=buy&itemid=111")
+            expect(lineMessage.template.columns[1].actions[1].type).equal("message")
+            expect(lineMessage.template.columns[1].actions[1].label).equal("Add to cart2")
+            expect(lineMessage.template.columns[1].actions[1].text).equal("Message2")
+            expect(lineMessage.template.columns[1].actions[2].type).equal("uri")
+            expect(lineMessage.template.columns[1].actions[2].label).equal("View detail2")
+            expect(lineMessage.template.columns[1].actions[2].uri).equal("http://example.com/page/111")
+        })
     })
 
 })

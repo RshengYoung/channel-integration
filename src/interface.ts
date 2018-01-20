@@ -14,5 +14,5 @@ export abstract class Adapter {
 }
 
 export interface Parser {
-    format(messge: IntegrationMessage): Promise<Array<any>>
+    format(messge: IntegrationMessage): Promise<any>
 }

@@ -15,12 +15,10 @@ describe("Client", () => {
         const message: IntegrationMessage = {
             channel: "line",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
-            message: [
-                {
-                    type: "text",
-                    text: "Text1"
-                }
-            ]
+            message: {
+                type: "text",
+                text: "Text1"
+            }
         }
         await client.send(message).then(response => {
             expect(response.status).equal("ok")
