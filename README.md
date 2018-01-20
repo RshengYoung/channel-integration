@@ -13,19 +13,31 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 ```js
 const bot = require("channel-integration")
 
-const lineClient = new bot.Client(CONFIG)
+const lineClient = new bot.Client({
+    id: "Channel id",
+    secret: "Channel secret",
+    token: "Channel access token"
+})
 const clients = new bot.Client([lineClient])
 ```
 
 ## Wiht Typescript
 ```ts
 import * as bot from 'channel-integration'
-const lineClient = new bot.Client(CONFIG)
+const lineClient = new bot.Client({
+    id: "Channel id",
+    secret: "Channel secret",
+    token: "Channel access token"
+})
 const clients = new bot.Client([lineClient])
 or
 
 import { Client, LineClient, WechatClient } from 'channel-integration'
-const lineClient = new Client(CONFIG)
+const lineClient = new Client({
+    id: "Channel id",
+    secret: "Channel secret",
+    token: "Channel access token"
+})
 const clients = new Client([lineClient])
 ```
 
