@@ -1,4 +1,4 @@
-Wechat Client
+🔸Wechat Client
 ===========
 
 ## Initialize
