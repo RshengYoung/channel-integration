@@ -7,6 +7,10 @@ Using npm
 $ npm install --save https://github.com/RshengYoung/channel-integration.git
 ```
 
+# Supports
+* [Line](https://github.com/RshengYoung/channel-integration/blob/master/src/line)
+* [Wechat](https://github.com/RshengYoung/channel-integration/blob/master/src/wechat)
+
 # Example
 
 ## With Javascript
