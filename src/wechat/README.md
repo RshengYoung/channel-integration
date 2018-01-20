@@ -11,7 +11,9 @@ const wechatClient = new WechatClient(CONFIG)
 |:--:|:-----:|:------:|:---:|:---:|:---:|:------:|
 | ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ❌   |
 
-## Send Text
+##Send Message
+
+### Send Text
 ```js
 wechatClient.send({
     channel: "wechat",
@@ -23,7 +25,7 @@ wechatClient.send({
 })
 ```
 
-## Send Image
+### Send Image
 ```js
 wechatClient.send({
     channel: "line",
@@ -35,7 +37,7 @@ wechatClient.send({
 })
 ```
 
-## Send Audio
+### Send Audio
 ```js
 wechatClient.send({
     channel: "wechat",
@@ -50,7 +52,7 @@ wechatClient.send({
 })
 ```
 
-## Send Video
+### Send Video
 ```js
 wechatClient.send({
     channel: "line",
