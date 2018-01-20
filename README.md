@@ -47,4 +47,23 @@ const message = {
         }
     ]
 }
+
+clients.send(message)
+    .then(result => {
+        console.log(JSON.stringify(result, null, 4))
+        /*
+        {
+            status: "ok"
+        }
+        */
+    })
+    .catch(error => {
+        console.log(JSON.stringify(error, null, 4))
+        /*
+        {
+            status: "error",
+            message: "<Error message>"
+        }
+        */
+    })
 ```
