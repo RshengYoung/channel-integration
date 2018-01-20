@@ -1,4 +1,3 @@
-
 Line Client
 ===========
 
@@ -14,7 +13,7 @@ lineClient.send({
     receiver: "<User id>",
     message: {
 	type: "text",
-        text: "Text Message"
+        text: "<Message text>"
     }
 })
 ```
