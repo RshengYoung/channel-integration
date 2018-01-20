@@ -10,7 +10,7 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 # Example
 
 ## Wiht Javascript
-```sh
+```js
 const bot = require("channel-integration")
 
 const lineClient = new bot.Client(CONFIG)
@@ -18,7 +18,7 @@ const clients = new bot.Client([lineClient])
 ```
 
 ## Wiht Typescript
-```sh
+```ts
 import * as bot from 'channel-integration'
 const lineClient = new bot.Client(CONFIG)
 const clients = new bot.Client([lineClient])
@@ -30,13 +30,13 @@ const clients = new Client([lineClient])
 ```
 
 ## Add new channel
-```sh
+```ts
 const wechatClient = new WechatClient(CONFIG)
 clients.use(wechatClient)
 ```
 
 ## Send message
-
+```ts
 const message = {
     channel: "<Channel name>",
     receiver: "<User id>",
@@ -47,3 +47,4 @@ const message = {
         }
     ]
 }
+```
