@@ -6,6 +6,11 @@ Wechat Client
 const wechatClient = new WechatCient(CONFIG)
 ```
 
+## Message types
+|Text|Sticker|Location|Image|Audio|Video|Template|
+|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|
+| ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ❌   |
+
 ## Send text
 ```ts
 lineClient.send({
