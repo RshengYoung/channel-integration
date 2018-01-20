@@ -2,7 +2,7 @@ Wechat Client
 ===========
 
 ## Initialize
-```ts
+```js
 const wechatClient = new WechatCient(CONFIG)
 ```
 
@@ -12,7 +12,7 @@ const wechatClient = new WechatCient(CONFIG)
 | ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ❌   |
 
 ## Send text
-```ts
+```js
 lineClient.send({
     channel: "wechat",
     receiver: "<User id>",
@@ -24,7 +24,7 @@ lineClient.send({
 ```
 
 ## Send image
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -36,7 +36,7 @@ lineClient.send({
 ```
 
 ## Send audio
-```ts
+```js
 lineClient.send({
     channel: "wechat",
     receiver: "<User id>",
@@ -51,7 +51,7 @@ lineClient.send({
 ```
 
 ## Send video
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",

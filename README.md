@@ -29,7 +29,7 @@ const clients = new bot.Client([lineClient])
 ```
 
 ## With TypeScript
-```ts
+```js
 import * as bot from 'channel-integration'
 const lineClient = new bot.Client({
     id: "<Channel id>",
@@ -39,7 +39,7 @@ const lineClient = new bot.Client({
 const clients = new bot.Client([lineClient])
 ```
 or
-```ts
+```js
 import { Client, LineClient, WechatClient } from "channel-integration"
 const lineClient = new Client({
     id: "<Channel id>",
@@ -50,13 +50,13 @@ const clients = new Client([lineClient])
 ```
 
 ### Add new channel
-```ts
+```js
 const wechatClient = new WechatClient(CONFIG)
 clients.use(wechatClient)
 ```
 
 ### Send message
-```ts
+```js
 const message = {
     channel: "<Channel name>",
     receiver: "<User id>",

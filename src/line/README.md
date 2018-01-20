@@ -2,7 +2,7 @@ Line Client
 ===========
 
 ## Initialize
-```ts
+```js
 const lineClient = new LineCient(CONFIG)
 ```
 
@@ -12,7 +12,7 @@ const lineClient = new LineCient(CONFIG)
 | ✅ |  ✅  |   ✅  | ✅  | ✅ | ✅  |   ✅   |
 
 ## Send text
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -24,7 +24,7 @@ lineClient.send({
 ```
 
 ## Send sticker
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -39,7 +39,7 @@ lineClient.send({
 ```
 
 ## Send location
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -56,7 +56,7 @@ lineClient.send({
 ```
 
 ## Send image
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -69,7 +69,7 @@ lineClient.send({
 
 
 ## Send audio
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -84,7 +84,7 @@ lineClient.send({
 ```
 
 ## Send video
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -101,7 +101,7 @@ lineClient.send({
 ```
 
 ## Send template (buttons)
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -129,7 +129,7 @@ lineClient.send({
 ```
 
 ## Send template (confirm)
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
@@ -161,7 +161,7 @@ lineClient.send({
 ```
 
 ## Send template (carousel)
-```ts
+```js
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
