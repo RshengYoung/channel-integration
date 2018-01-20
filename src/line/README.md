@@ -6,6 +6,11 @@ Line Client
 const lineClient = new LineCient(CONFIG)
 ```
 
+## Message types
+|Text|Sticker|Location|Image|Audio|Video|Template|
+|:---|:------|:-------|:----|:----|:----|:-------|
+|✅|✅|✅|✅|✅|✅|✅|
+
 ## Send text
 ```ts
 lineClient.send({
@@ -28,6 +33,23 @@ lineClient.send({
         sticker: {
             packageId: "<Package id>",
             stickerId: "<Sticker id>"
+        }
+    }
+})
+```
+
+## Send location
+```ts
+lineClient.send({
+    channel: "line",
+    receiver: "<User id>",
+    message: {
+        type: "location",
+        location: {
+            title: "<Location title>",
+            address: "<Location adress>",
+            latitude: <Location latitude>,
+            longitude: <Location longitude>
         }
     }
 })

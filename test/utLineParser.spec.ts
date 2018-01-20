@@ -21,7 +21,29 @@ describe("LineParaer", () => {
             expect(lineMessage.type).equal("text")
             expect(lineMessage.text).equal("Line Test Message")
         })
+    })
 
+    it("Location Message format()", () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "Uc6af6c3......",
+            message: {
+                type: "location",
+                location: {
+                    title: "Test Location",
+                    address: "Test Location Address",
+                    latitude: 35.65910807942215,
+                    longitude: 139.70372892916203
+                }
+            }
+        }
+        parser.format(message).then(lineMessage => {
+            expect(lineMessage.type).equal("location")
+            expect(lineMessage.title).equal("Test Location")
+            expect(lineMessage.address).equal("Test Location Address")
+            expect(lineMessage.latitude).equal(35.65910807942215)
+            expect(lineMessage.longitude).equal(139.70372892916203)
+        })
     })
 
     it("Image Message format()", () => {

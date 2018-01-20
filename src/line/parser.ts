@@ -1,10 +1,10 @@
 import { Parser } from '../interface'
-import { IntegrationMessage, TextMessage, ImageMessage, VideoMessage, AudioMessage, TemplateMessage, StickerMessage } from '../model'
+import { IntegrationMessage, TextMessage, ImageMessage, VideoMessage, AudioMessage, TemplateMessage, StickerMessage, LocationMessage } from '../model'
 export class LineParser implements Parser {
     constructor() { }
 
     format(integrationMessage: IntegrationMessage): Promise<any> {
-        const messageType = integrationMessage.message.type
+        const messageType = integrationMessage.message.type.toLowerCase()
         let lineMessage: any = { type: messageType }
         if (messageType === "text") {
             const textMessage = integrationMessage.message as TextMessage
@@ -17,7 +17,13 @@ export class LineParser implements Parser {
             const stickerMessage = integrationMessage.message as StickerMessage
             lineMessage.packageId = stickerMessage.sticker.packageId
             lineMessage.stickerId = stickerMessage.sticker.stickerId
-        } else if (messageType === "video") {
+        } else if (messageType === "location") {
+            const locationMessag = integrationMessage.message as LocationMessage
+            lineMessage.title = locationMessag.location.title
+            lineMessage.address = locationMessag.location.address
+            lineMessage.latitude = locationMessag.location.latitude
+            lineMessage.longitude = locationMessag.location.longitude
+        }else if (messageType === "video") {
             const videoMessage = integrationMessage.message as VideoMessage
             lineMessage.originalContentUrl = videoMessage.video.videoUrl
             lineMessage.previewImageUrl = videoMessage.video.previewImage

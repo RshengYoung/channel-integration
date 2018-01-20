@@ -19,7 +19,25 @@ describe("Line", () => {
                 text: "Text Message"
             }
         }
+        await line.send(message).then(response => {
+            expect(response.status).equal("ok")
+        })
+    })
 
+    it("Send location", async () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
+            message: {
+                type: "location",
+                location: {
+                    title: "Test Location",
+                    address: "Test Location Address",
+                    latitude: 35.65910807942215,
+                    longitude: 139.70372892916203
+                }
+            }
+        }
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
@@ -37,7 +55,6 @@ describe("Line", () => {
                 }
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
@@ -52,11 +69,9 @@ describe("Line", () => {
                 image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
-
     })
 
     it("Send video", async () => {
@@ -73,11 +88,9 @@ describe("Line", () => {
                 }
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
-
     })
 
     it("Send audio", async () => {
@@ -92,11 +105,9 @@ describe("Line", () => {
                 }
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
-
     })
 
     it("Send template buttons", async () => {
@@ -135,7 +146,6 @@ describe("Line", () => {
                 }
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
@@ -166,7 +176,6 @@ describe("Line", () => {
                 }
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
@@ -230,7 +239,6 @@ describe("Line", () => {
                 }
             }
         }
-
         await line.send(message).then(response => {
             expect(response.status).equal("ok")
         })
