@@ -56,7 +56,7 @@ const message = {
     message: [
         {
             type: "<Message type>",
-            text: "Text1"
+            ...<Message object>
         }
     ]
 }
