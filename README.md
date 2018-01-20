@@ -9,7 +9,7 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 
 # Example
 
-## Wiht Javascript
+## With Javascript
 ```js
 const bot = require("channel-integration")
 
@@ -21,7 +21,7 @@ const lineClient = new bot.Client({
 const clients = new bot.Client([lineClient])
 ```
 
-## Wiht Typescript
+## With Typescript
 ```ts
 import * as bot from 'channel-integration'
 const lineClient = new bot.Client({
