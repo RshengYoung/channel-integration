@@ -13,7 +13,7 @@ const wechatClient = new WechatClient(CONFIG)
 
 ## Send Text
 ```js
-lineClient.send({
+wechatClient.send({
     channel: "wechat",
     receiver: "<User id>",
     message: {
@@ -25,7 +25,7 @@ lineClient.send({
 
 ## Send Image
 ```js
-lineClient.send({
+wechatClient.send({
     channel: "line",
     receiver: "<User id>",
     message: {
@@ -37,7 +37,7 @@ lineClient.send({
 
 ## Send Audio
 ```js
-lineClient.send({
+wechatClient.send({
     channel: "wechat",
     receiver: "<User id>",
     message: {
@@ -52,7 +52,7 @@ lineClient.send({
 
 ## Send Video
 ```js
-lineClient.send({
+wechatClient.send({
     channel: "line",
     receiver: "<User id>",
     message: {
@@ -65,4 +65,14 @@ lineClient.send({
         }
     }
 })
+```
+
+## Upload Media
+```js
+wechatClient.uploadMedia("<Media type (image, voice, video, thumb)>", "<Media URL>")
+    .then(mediaId => {
+        .
+        .
+        .
+    })
 ```
