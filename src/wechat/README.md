@@ -6,12 +6,12 @@ Wechat Client
 const wechatClient = new WechatClient(CONFIG)
 ```
 
-## Message types
+## Message Types
 |Text|Sticker|Location|Image|Audio|Video|Template|
 |:--:|:-----:|:------:|:---:|:---:|:---:|:------:|
 | ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ❌   |
 
-## Send text
+## Send Text
 ```js
 lineClient.send({
     channel: "wechat",
@@ -23,7 +23,7 @@ lineClient.send({
 })
 ```
 
-## Send image
+## Send Image
 ```js
 lineClient.send({
     channel: "line",
@@ -35,7 +35,7 @@ lineClient.send({
 })
 ```
 
-## Send audio
+## Send Audio
 ```js
 lineClient.send({
     channel: "wechat",
@@ -50,7 +50,7 @@ lineClient.send({
 })
 ```
 
-## Send video
+## Send Video
 ```js
 lineClient.send({
     channel: "line",
