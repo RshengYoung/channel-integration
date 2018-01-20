@@ -13,7 +13,7 @@ const lineClient = new LineClient(CONFIG)
 
 ## Send Message
 
-### Send Text
+### Text
 ```js
 lineClient.send({
     channel: "line",
@@ -25,7 +25,7 @@ lineClient.send({
 })
 ```
 
-### Send Sticker
+### Sticker
 ```js
 lineClient.send({
     channel: "line",
@@ -40,7 +40,7 @@ lineClient.send({
 })
 ```
 
-### Send Location
+### Location
 ```js
 lineClient.send({
     channel: "line",
@@ -57,7 +57,7 @@ lineClient.send({
 })
 ```
 
-### Send Image
+### Image
 ```js
 lineClient.send({
     channel: "line",
@@ -70,7 +70,7 @@ lineClient.send({
 ```
 
 
-### Send Audio
+### Audio
 ```js
 lineClient.send({
     channel: "line",
@@ -85,7 +85,7 @@ lineClient.send({
 })
 ```
 
-### Send Video
+### Video
 ```js
 lineClient.send({
     channel: "line",
@@ -102,7 +102,7 @@ lineClient.send({
 })
 ```
 
-### Send Template (buttons)
+### Template (buttons)
 ```js
 lineClient.send({
     channel: "line",
@@ -130,7 +130,7 @@ lineClient.send({
 })
 ```
 
-### Send Template (confirm)
+### Template (confirm)
 ```js
 lineClient.send({
     channel: "line",
@@ -162,7 +162,7 @@ lineClient.send({
 })
 ```
 
-### Send Template (carousel)
+### Template (carousel)
 ```js
 lineClient.send({
     channel: "line",
