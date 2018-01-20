@@ -3,7 +3,7 @@ Wechat Client
 
 ## Initialize
 ```js
-const wechatClient = new WechatCient(CONFIG)
+const wechatClient = new WechatClient(CONFIG)
 ```
 
 ## Message types
