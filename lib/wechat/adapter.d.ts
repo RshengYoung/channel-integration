@@ -1,7 +1,6 @@
 import { Adapter } from '../interface';
 import { Config, IntegrationMessage } from '../model';
 export declare class WechatClient extends Adapter {
-    private sessionId;
     private cache;
     private wechatUrl;
     private getTokenUrl;

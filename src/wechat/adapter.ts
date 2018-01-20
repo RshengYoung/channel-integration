@@ -5,9 +5,9 @@ import * as FormData from 'form-data'
 
 import { Adapter } from '../interface'
 import { Config, IntegrationMessage } from '../model'
+import { Buffer } from 'buffer';
 
 export class WechatClient extends Adapter {
-    private sessionId: string
     private cache: Cache
     private wechatUrl: string = "https://api.weixin.qq.com/cgi-bin"
     private getTokenUrl: string = this.wechatUrl + "/token?"
@@ -16,7 +16,6 @@ export class WechatClient extends Adapter {
 
     constructor(config: Config) {
         super(config)
-        this.sessionId = uuid.v4()
         this.cache = new Cache({ stdTTL: 7000, checkperiod: 0 })
         this.getAccessToken()
     }
@@ -33,15 +32,10 @@ export class WechatClient extends Adapter {
         const mediaBuffer = await this.getBuffer(media)
         const accessToken = await this.getAccessToken()
         const url = `${this.uploadMediaUrl}access_token=${accessToken}&type=${type}`
-        console.log("URL: ", url)
         const form = new FormData()
-        form.append("media", mediaBuffer, {
-            filename: uuid.v4() + ".jpg",
-            contentType: 'image/jpeg',
-            knownLength: mediaBuffer.byteLength
-        })
+        form.append("media", mediaBuffer)
         return axios.post(url, form, {
-            headers: form.getHeaders()
+            headers: { "Content-Type": "multipart/form-data" }
         }).then(res => {
             console.log(res.data)
 
@@ -51,18 +45,18 @@ export class WechatClient extends Adapter {
 
     private getAccessToken(): Promise<string> {
         const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
-        const token = this.cache.get(this.sessionId)
+        const token = this.cache.get(this.config.id)
         if (token)
             return Promise.resolve(token as string)
         return axios.get(url).then(result => {
             const accessToken = result.data.access_token as string
-            this.cache.set(this.sessionId, accessToken)
+            this.cache.set(this.config.id, accessToken)
             return Promise.resolve(accessToken)
         })
     }
 
     private getBuffer(media: string): Promise<Buffer> {
-        return axios.get(media, { responseType: "arraybuffer" }).then(buffer => Promise.resolve(buffer.data))
+        return axios.get(media, { responseType: "arraybuffer" }).then(res => new Buffer(res.data))
     }
 
 }
