@@ -2,24 +2,24 @@
 Line Client
 ===========
 
-# Initialize
+## Initialize
 ```ts
 const lineClient = new LineCient(CONFIG)
 ```
 
-# Send text
+## Send text
 ```ts
 lineClient.send({
     channel: "line",
     receiver: "<User id>",
     message: {
-	    type: "text",
+	type: "text",
         text: "Text Message"
     }
 })
 ```
 
-# Send sticker
+## Send sticker
 ```ts
 lineClient.send({
     channel: "line",
@@ -34,7 +34,7 @@ lineClient.send({
 })
 ```
 
-# Send image
+## Send image
 ```ts
 lineClient.send({
     channel: "line",
@@ -47,7 +47,7 @@ lineClient.send({
 ```
 
 
-# Send audio
+## Send audio
 ```ts
 lineClient.send({
     channel: "line",
@@ -62,7 +62,7 @@ lineClient.send({
 })
 ```
 
-# Send video
+## Send video
 ```ts
 lineClient.send({
     channel: "line",
@@ -79,7 +79,7 @@ lineClient.send({
 })
 ```
 
-# Send template (buttons)
+## Send template (buttons)
 ```ts
 lineClient.send({
     channel: "line",
