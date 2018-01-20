@@ -29,13 +29,13 @@ const lineClient = new Client(CONFIG)
 const clients = new Client([lineClient])
 ```
 
-## Add new channel
+### Add new channel
 ```ts
 const wechatClient = new WechatClient(CONFIG)
 clients.use(wechatClient)
 ```
 
-## Send message
+### Send message
 ```ts
 const message = {
     channel: "<Channel name>",
