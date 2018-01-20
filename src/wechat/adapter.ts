@@ -63,17 +63,15 @@ export class WechatClient extends Adapter {
     }
 
     private getAccessToken(): Promise<string> {
-        return Promise.resolve("6_kh0e5Ri-gZ9IWabsic98WrgkeErjstM0lPqgQ8seUQ5xjDHDpWpQC0FTh-vSUwBEWtsJZIgeCiEVfg_L5hpNZKVrN8hZOwr6AANxXc1iP65HSY06XYRnNy5q8hZNjFmgf-5g2PtCdjnuWe5PWUQaACALJF")
-        // const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
-        // const token = this.cache.get(this.config.id) as string
-        // if (token)
-        //     return Promise.resolve(token as string)
-        // return axios.get(url).then(result => {
-        //     const accessToken = result.data.access_token as string
-        //     // console.log("Set token: ", accessToken)
-        //     this.cache.set(this.config.id, accessToken)
-        //     return Promise.resolve(accessToken)
-        // })
+        const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
+        const token = this.cache.get(this.config.id) as string
+        if (token)
+            return Promise.resolve(token as string)
+        return axios.get(url).then(result => {
+            const accessToken = result.data.access_token as string
+            this.cache.set(this.config.id, accessToken)
+            return Promise.resolve(accessToken)
+        })
     }
 
     private getBuffer(media: string): Promise<Buffer> {
