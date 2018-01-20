@@ -9,8 +9,8 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 
 # Supports
 
-| |Channel|
-|:--|:--|
+|⭐|Platform|
+|:--:|:--|
 |<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/line.png">|[Line](https://github.com/RshengYoung/channel-integration/blob/master/src/line)|
 |<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/Wechat.png">|[Wechat](https://github.com/RshengYoung/channel-integration/blob/master/src/wechat)|
 
