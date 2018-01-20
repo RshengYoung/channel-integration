@@ -151,9 +151,9 @@ lineClient.send({
             type: "carousel",
             columns: [
                 {
-                    thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
-                    title: "this is menu1",
-                    text: "description1",
+                    thumbnailImageUrl: "<Image url (https)>",
+                    title: "<Column title>",
+                    text: "<Column text>",
                     actions: [
                         {
                             type: "<Action type (postback, message, uri)>",
