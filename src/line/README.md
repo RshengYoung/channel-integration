@@ -1,5 +1,5 @@
 
-#Line Client
+Line Client
 ===========
 
 ## Initialize
@@ -88,7 +88,7 @@ lineClient.send({
         type: "template",
         description: "<Message description>"
         template: {
-            type: "<Template type (buttons, confirm, carousel)>",
+            type: "buttons",
             thumbnailImageUrl: "<Image url (https)>",
             title: "<Template title>",
             text: "<Template text>",
@@ -100,7 +100,72 @@ lineClient.send({
                     data?: "<Postback data>",
                     uri?: "<Http url>"
                 },
-                ......
+                ....
+            ]
+        }
+    }
+})
+```
+
+## Send template (confirm)
+```ts
+lineClient.send({
+    channel: "line",
+    receiver: "<User id>",
+    message: {
+        type: "template",
+        description: "<Message description>"
+        template: {
+            type: "confirm",
+            thumbnailImageUrl: "<Image url (https)>",
+            title: "<Template title>",
+            text: "<Template text>",
+            actions: [
+                {
+                    type: "<Action type (postback, message, uri)>",
+                    label: "<Button label>",
+                    text?: "<Message text>",
+                    data?: "<Postback data>"
+                },
+                {
+                    type: "<Action type (postback, message, uri)>",
+                    label: "<Button label>",
+                    text?: "<Message text>",
+                    data?: "<Postback data>"
+                }
+            ]
+        }
+    }
+})
+```
+
+## Send template (carousel)
+```ts
+lineClient.send({
+    channel: "line",
+    receiver: "<User id>",
+    message: {
+        type: "template",
+        description: "<Message description>"
+        template: {
+            type: "carousel",
+            columns: [
+                {
+                    thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                    title: "this is menu1",
+                    text: "description1",
+                    actions: [
+                        {
+                            type: "<Action type (postback, message, uri)>",
+                            label: "<Button label>",
+                            text?: "<Message text>",
+                            data?: "<Postback data>",
+                            uri?: "<Http url>"
+                        },
+                        ...
+                    ]
+                },
+                ..........
             ]
         }
     }
