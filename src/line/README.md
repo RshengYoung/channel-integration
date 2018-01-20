@@ -13,7 +13,7 @@ lineClient.send({
     channel: "line",
     receiver: "<User id>",
     message: {
-	    type: "text",
+	type: "text",
         text: "Text Message"
     }
 })
