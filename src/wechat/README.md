@@ -30,7 +30,7 @@ wechatClient.send({
 ### Image
 ```js
 wechatClient.send({
-    channel: "line",
+    channel: "wechat",
     receiver: "<User id>",
     message: {
         type: "image",
@@ -57,7 +57,7 @@ wechatClient.send({
 ### Video
 ```js
 wechatClient.send({
-    channel: "line",
+    channel: "wechat",
     receiver: "<User id>",
     message: {
         type: "video",
@@ -66,6 +66,34 @@ wechatClient.send({
             description: "<Video description>",
             previewImage: "<Preview image (https) (jpg) or Media id(best)>",
             videoUrl: "<Video url (https) (mp4) or Media id(best)>"
+        }
+    }
+})
+```
+
+### Template(news)
+```js
+wechatClient.send({
+    channel: "wechat",
+    receiver: "<User id>",
+    message: {
+        type: "template",
+        description: "<Description>",
+        template: {
+            type: "carousel",
+            columns: [
+                {
+                    thumbnailImageUrl: "<Image url>",
+                    title: "<Title>",
+                    text: "<Text>",
+                    actions: [{
+                        type: "uri",
+                        label: "<any>",
+                        uri: "<Http/Https url>"
+                    }]
+                },
+                ........
+            ]
         }
     }
 })
