@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 import 'mocha'
 
-
 import { WECHAT } from '../config'
 import { WechatClient } from '../src/wechat/adapter'
 import { Adapter } from '../src/interface';
@@ -101,6 +100,46 @@ describe("Wechat", () => {
                 }
             }
         }
+        await wechat.send(message).then(response => {
+            expect(response.status).equal("ok")
+        })
+    })
+
+    it("Send Template (news)", async () => {
+        const message: IntegrationMessage = {
+            channel: "wechat",
+            receiver: "oXFfsv1N3Rfa5Cj0glsZTWUEjpYQ",
+            message: {
+                type: "template",
+                description: "Description",
+                template: {
+                    type: "carousel",
+                    columns: [
+                        {
+                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                            title: "Title1",
+                            text: "Text1",
+                            actions: [{
+                                type: "uri",
+                                label: "Label",
+                                uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+                            }]
+                        },
+                        {
+                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                            title: "Title2",
+                            text: "Text2",
+                            actions: [{
+                                type: "uri",
+                                label: "Label",
+                                uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+                            }]
+                        }
+                    ]
+                }
+            }
+        }
+
         await wechat.send(message).then(response => {
             expect(response.status).equal("ok")
         })

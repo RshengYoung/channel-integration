@@ -14,7 +14,7 @@ export class Client {
     }
 
     send(message: IntegrationMessage): Promise<any> {
-        const clientIndex = this.integrations.map(client => client.serviceName()).indexOf(message.channel)
+        const clientIndex = this.integrations.map(client => client.serviceName()).indexOf(message.channel.toLowerCase())
         if (clientIndex < 0)
             return Promise.reject("Error: The channel doesn't be used.")
         return this.integrations[clientIndex].send(message)

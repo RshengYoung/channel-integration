@@ -1,4 +1,4 @@
-import { TemplateContent } from '@line/bot-sdk'
+import { TemplateContent, TemplateButtons, TemplateConfirm, TemplateCarousel, TemplateImageCarousel } from '@line/bot-sdk'
 
 export type Config = {
     id: string

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import { Parser } from '../interface'
 import { IntegrationMessage, TextMessage, ImageMessage, VideoMessage, AudioMessage, TemplateMessage } from '../model'
+import { TemplateButtons, TemplateCarousel, URIAction } from '@line/bot-sdk';
 export class WechatParser implements Parser {
     constructor() { }
 
@@ -29,6 +30,20 @@ export class WechatParser implements Parser {
             const audioMessage = integrationMessage.message as AudioMessage
             wechatMessage.msgtype = "voice"
             wechatMessage.voice = { media_id: audioMessage.audio.audioUrl }
+        } else if (messageType === "template") {
+            const templateMessage = integrationMessage.message as TemplateMessage
+            const buttonsMessage = templateMessage.template as TemplateCarousel
+            wechatMessage.msgtype = "news"
+            wechatMessage.news = { articles: [] }
+            buttonsMessage.columns.forEach(column => {
+                const actions = column.actions as URIAction[]
+                wechatMessage.news.articles.push({
+                    title: column.title,
+                    description: column.text,
+                    url: actions[0].uri,
+                    picurl: column.thumbnailImageUrl
+                })
+            })
         } else
             return Promise.reject("Error: It doesn't support the message type.")
         return Promise.resolve(wechatMessage)
