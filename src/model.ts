@@ -10,7 +10,7 @@ export type Config = {
 export type IntegrationMessage = {
     channel: "line" | "wechat"
     receiver: string
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | NewsMessage
 }
 
 // export type LineMessage = {
@@ -77,3 +77,12 @@ export type TemplateMessage = {
     template: TemplateContent
 }
 
+export type NewsMessage = {
+    type: "news"
+    columns: {
+        title: string
+        description: string
+        url: string
+        image: string
+    }[]
+}

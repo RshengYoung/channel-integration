@@ -9,9 +9,9 @@ const wechatClient = new WechatClient(CONFIG)
 ```
 
 ## Message Types
-|Text|Sticker|Location|Image|Audio|Video|Template|
-|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|
-| ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |✅(news)|
+|Text|Sticker|Location|Image|Audio|Video|Template|News|
+|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:--:|
+| ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ❌   | ✅|
 
 ## Send Message
 
@@ -71,30 +71,22 @@ wechatClient.send({
 })
 ```
 
-### Template(news)
+### News
 ```js
 wechatClient.send({
     channel: "wechat",
     receiver: "<User id>",
     message: {
-        type: "template",
-        description: "<Description>",
-        template: {
-            type: "carousel",
-            columns: [
-                {
-                    thumbnailImageUrl: "<Image url>",
-                    title: "<Title>",
-                    text: "<Text>",
-                    actions: [{
-                        type: "uri",
-                        label: "<any>",
-                        uri: "<Http/Https url>"
-                    }]
-                },
-                ........
-            ]
-        }
+        type: "news",
+        columns: [
+            {
+                title: "<Title>",
+                description: "<Description>",
+                url: "<Http/Https url>",
+                image: "<Image url>"
+            },
+            ......
+        ]
     }
 })
 ```

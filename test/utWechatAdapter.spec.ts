@@ -105,38 +105,32 @@ describe("Wechat", () => {
         })
     })
 
-    it("Send Template (news)", async () => {
+    it("Send News", async () => {
         const message: IntegrationMessage = {
             channel: "wechat",
             receiver: "oXFfsv1N3Rfa5Cj0glsZTWUEjpYQ",
             message: {
-                type: "template",
-                description: "Description",
-                template: {
-                    type: "carousel",
-                    columns: [
-                        {
-                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
-                            title: "Title1",
-                            text: "Text1",
-                            actions: [{
-                                type: "uri",
-                                label: "Label",
-                                uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
-                            }]
-                        },
-                        {
-                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
-                            title: "Title2",
-                            text: "Text2",
-                            actions: [{
-                                type: "uri",
-                                label: "Label",
-                                uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
-                            }]
-                        }
-                    ]
-                }
+                type: "news",
+                columns: [
+                    {
+                        title: "Column1",
+                        description: "Description1",
+                        url: "https://storage.googleapis.com/paas-storage/image/1-1_meal.jpg",
+                        image: "https://storage.googleapis.com/paas-storage/image/1-1_meal.jpg"
+                    },
+                    {
+                        title: "Column2",
+                        description: "Description2",
+                        url: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg",
+                        image: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg"
+                    },
+                    {
+                        title: "Column3",
+                        description: "Description3",
+                        url: "https://storage.googleapis.com/paas-storage/image/1-3_fruit.jpg",
+                        image: "https://storage.googleapis.com/paas-storage/image/1-3_fruit.jpg"
+                    }
+                ]
             }
         }
 

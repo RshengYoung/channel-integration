@@ -8,7 +8,7 @@ export declare type Config = {
 export declare type IntegrationMessage = {
     channel: "line" | "wechat";
     receiver: string;
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage;
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | NewsMessage;
 };
 export declare type TextMessage = {
     type: "text";
@@ -54,4 +54,13 @@ export declare type TemplateMessage = {
     type: "template";
     description: string;
     template: TemplateContent;
+};
+export declare type NewsMessage = {
+    type: "news";
+    columns: {
+        title: string;
+        description: string;
+        url: string;
+        image: string;
+    }[];
 };

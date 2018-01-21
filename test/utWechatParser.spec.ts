@@ -88,48 +88,47 @@ describe("Wechat", () => {
             channel: "wechat",
             receiver: "oXFfsv1N3......",
             message: {
-                type: "template",
-                description: "Description",
-                template: {
-                    type: "carousel",
-                    columns: [
-                        {
-                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
-                            title: "Title1",
-                            text: "Text1",
-                            actions: [{
-                                type: "uri",
-                                label: "Label",
-                                uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
-                            }]
-                        },
-                        {
-                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
-                            title: "Title2",
-                            text: "Text2",
-                            actions: [{
-                                type: "uri",
-                                label: "Label",
-                                uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
-                            }]
-                        }
-                    ]
-                }
+                type: "news",
+                columns: [
+                    {
+                        title: "Column1",
+                        description: "Description1",
+                        url: "https://storage.googleapis.com/paas-storage/image/1-1_meal.jpg",
+                        image: "https://storage.googleapis.com/paas-storage/image/1-1_meal.jpg"
+                    },
+                    {
+                        title: "Column2",
+                        description: "Description2",
+                        url: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg",
+                        image: "https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg"
+                    },
+                    {
+                        title: "Column3",
+                        description: "Description3",
+                        url: "https://storage.googleapis.com/paas-storage/image/1-3_fruit.jpg",
+                        image: "https://storage.googleapis.com/paas-storage/image/1-3_fruit.jpg"
+                    }
+                ]
             }
         }
 
         parser.format(message).then(wechatMessage => {
             expect(wechatMessage.touser).equal("oXFfsv1N3......")
             expect(wechatMessage.msgtype).equal("news")
-            expect(wechatMessage.news.articles[0].title).equal("Title1")
-            expect(wechatMessage.news.articles[0].description).equal("Text1")
-            expect(wechatMessage.news.articles[0].url).equal("https://storage.googleapis.com/paas-storage/3-2_dress.jpg")
-            expect(wechatMessage.news.articles[0].picurl).equal("https://storage.googleapis.com/paas-storage/3-2_dress.jpg")
+            expect(wechatMessage.news.articles[0].title).equal("Column1")
+            expect(wechatMessage.news.articles[0].description).equal("Description1")
+            expect(wechatMessage.news.articles[0].url).equal("https://storage.googleapis.com/paas-storage/image/1-1_meal.jpg")
+            expect(wechatMessage.news.articles[0].picurl).equal("https://storage.googleapis.com/paas-storage/image/1-1_meal.jpg")
 
-            expect(wechatMessage.news.articles[1].title).equal("Title2")
-            expect(wechatMessage.news.articles[1].description).equal("Text2")
-            expect(wechatMessage.news.articles[1].url).equal("https://storage.googleapis.com/paas-storage/3-2_dress.jpg")
-            expect(wechatMessage.news.articles[1].picurl).equal("https://storage.googleapis.com/paas-storage/3-2_dress.jpg")
+            expect(wechatMessage.news.articles[1].title).equal("Column2")
+            expect(wechatMessage.news.articles[1].description).equal("Description2")
+            expect(wechatMessage.news.articles[1].url).equal("https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg")
+            expect(wechatMessage.news.articles[1].picurl).equal("https://storage.googleapis.com/paas-storage/image/1-2_drink.jpg")
+            
+            expect(wechatMessage.news.articles[2].title).equal("Column3")
+            expect(wechatMessage.news.articles[2].description).equal("Description3")
+            expect(wechatMessage.news.articles[2].url).equal("https://storage.googleapis.com/paas-storage/image/1-3_fruit.jpg")
+            expect(wechatMessage.news.articles[2].picurl).equal("https://storage.googleapis.com/paas-storage/image/1-3_fruit.jpg")
         })
 
     })
