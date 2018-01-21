@@ -18,7 +18,7 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 
 ## With JavaScript
 ```js
-const bot = require("channel-integration")
+const bot = require("push-integration")
 
 const lineClient = new bot.Client({
     id: "<Channel id>",
@@ -30,7 +30,7 @@ const clients = new bot.Client([lineClient])
 
 ## With TypeScript
 ```js
-import * as bot from 'channel-integration'
+import * as bot from 'push-integration'
 const lineClient = new bot.Client({
     id: "<Channel id>",
     secret: "<Channel secret>",
@@ -40,7 +40,7 @@ const clients = new bot.Client([lineClient])
 ```
 or
 ```js
-import { Client, LineClient, WechatClient } from "channel-integration"
+import { Client, LineClient, WechatClient } from "push-integration"
 const lineClient = new Client({
     id: "<Channel id>",
     secret: "<Channel secret>",
