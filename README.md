@@ -1,4 +1,4 @@
-🔸Channel Integration
+🔸Push Integration
 ===========
 
 # Install
