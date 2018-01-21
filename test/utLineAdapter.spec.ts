@@ -42,7 +42,7 @@ describe("Line", () => {
             expect(response.status).equal("ok")
         })
     })
-    
+
     it("Send sticker", async () => {
         const message: IntegrationMessage = {
             channel: "line",
@@ -244,5 +244,46 @@ describe("Line", () => {
         })
     })
 
+    it("Send ImageMap Message", async () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
+            message: {
+                type: "imageMap",
+                imageMap: {
+                    image: "https://storage.googleapis.com/paas-storage/coupons",
+                    description: "My Product",
+                    width: 1040,
+                    height: 1040,
+                    actions: [
+                        {
+                            type: "message",
+                            text: "Drink",
+                            area: { x: 0, y: 0, width: 520, height: 520 }
+                        },
+                        {
+                            type: "message",
+                            text: "Meal",
+                            area: { x: 520, y: 0, width: 520, height: 520 }
+                        },
+                        {
+                            type: "message",
+                            text: "Fruit",
+                            area: { x: 0, y: 520, width: 520, height: 520 }
+                        },
+                        {
+                            type: "message",
+                            text: "Location",
+                            area: { x: 520, y: 520, width: 520, height: 520 }
+                        }
+                    ]
+                }
+            }
+        }
+        await line.send(message).then(response => {
+            expect(response.status).equal("ok")
+        })
+
+    })
 
 })

@@ -315,4 +315,77 @@ describe("LineParaer", () => {
         })
     })
 
+    it("ImageMap Message format()", () => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "Uc6af6c3......",
+            message: {
+                type: "imageMap",
+                imageMap: {
+                    image: "https://storage.googleapis.com/paas-storage/coupons",
+                    description: "My Product",
+                    width: 1040,
+                    height: 1040,
+                    actions: [
+                        {
+                            type: "message",
+                            text: "Drink",
+                            area: { x: 0, y: 0, width: 520, height: 520 }
+                        },
+                        {
+                            type: "message",
+                            text: "Meal",
+                            area: { x: 520, y: 0, width: 520, height: 520 }
+                        },
+                        {
+                            type: "message",
+                            text: "Fruit",
+                            area: { x: 0, y: 520, width: 520, height: 520 }
+                        },
+                        {
+                            type: "message",
+                            text: "Location",
+                            area: { x: 520, y: 520, width: 520, height: 520 }
+                        }
+                    ]
+                }
+            }
+        }
+        parser.format(message).then(lineMessage => {
+            expect(lineMessage.type).equal("imagemap")
+            expect(lineMessage.baseUrl).equal("https://storage.googleapis.com/paas-storage/coupons")
+            expect(lineMessage.altText).equal("My Product")
+            expect(lineMessage.baseSize.width).equal(1040)
+            expect(lineMessage.baseSize.height).equal(1040)
+
+            expect(lineMessage.actions[0].type).equal("message")
+            expect(lineMessage.actions[0].text).equal("Drink")
+            expect(lineMessage.actions[0].area.x).equal(0)
+            expect(lineMessage.actions[0].area.y).equal(0)
+            expect(lineMessage.actions[0].area.width).equal(520)
+            expect(lineMessage.actions[0].area.height).equal(520)
+
+            expect(lineMessage.actions[1].type).equal("message")
+            expect(lineMessage.actions[1].text).equal("Meal")
+            expect(lineMessage.actions[1].area.x).equal(520)
+            expect(lineMessage.actions[1].area.y).equal(0)
+            expect(lineMessage.actions[1].area.width).equal(520)
+            expect(lineMessage.actions[1].area.height).equal(520)
+
+            expect(lineMessage.actions[2].type).equal("message")
+            expect(lineMessage.actions[2].text).equal("Fruit")
+            expect(lineMessage.actions[2].area.x).equal(0)
+            expect(lineMessage.actions[2].area.y).equal(520)
+            expect(lineMessage.actions[2].area.width).equal(520)
+            expect(lineMessage.actions[2].area.height).equal(520)
+
+            expect(lineMessage.actions[3].type).equal("message")
+            expect(lineMessage.actions[3].text).equal("Location")
+            expect(lineMessage.actions[3].area.x).equal(520)
+            expect(lineMessage.actions[3].area.y).equal(520)
+            expect(lineMessage.actions[3].area.width).equal(520)
+            expect(lineMessage.actions[3].area.height).equal(520)
+        })
+    })
+
 })

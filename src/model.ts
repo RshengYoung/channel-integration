@@ -1,4 +1,4 @@
-import { TemplateContent, TemplateButtons, TemplateConfirm, TemplateCarousel, TemplateImageCarousel } from '@line/bot-sdk'
+import { TemplateContent, TemplateButtons, TemplateConfirm, TemplateCarousel, TemplateImageCarousel, ImageMapAction } from '@line/bot-sdk'
 
 export type Config = {
     id: string
@@ -10,20 +10,8 @@ export type Config = {
 export type IntegrationMessage = {
     channel: "line" | "wechat"
     receiver: string
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | NewsMessage
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage
 }
-
-// export type LineMessage = {
-//     channel: "line"
-//     receiver: string
-//     message: [TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage]
-// }
-
-// export type WechatMessage = {
-//     channel: "wechat"
-//     receiver: string
-//     message: [TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage]
-// }
 
 export type TextMessage = {
     type: "text"
@@ -75,6 +63,17 @@ export type TemplateMessage = {
     type: "template"
     description: string
     template: TemplateContent
+}
+
+export type ImageMapMessage = {
+    type: "imageMap"
+    imageMap: {
+        image: string
+        description: string
+        width: number
+        height: number
+        actions: ImageMapAction[]
+    }
 }
 
 export type NewsMessage = {

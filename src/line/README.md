@@ -7,9 +7,9 @@ const lineClient = new LineClient(CONFIG)
 ```
 
 ## Message Types
-|Text|Sticker|Location|Image|Audio|Video|Template|News|
-|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:--:|
-| ✅ |  ✅  |   ✅  | ✅  | ✅ | ✅  |   ✅   | ❌|
+|Text|Sticker|Location|Image|Audio|Video|Template|ImageMap|News|
+|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:------:|:--:|
+| ✅ |  ✅  |   ✅  | ✅  | ✅ | ✅  |   ✅   |:------:| ❌|
 
 ## Send Message
 
@@ -189,6 +189,32 @@ lineClient.send({
                     ]
                 },
                 ..........
+            ]
+        }
+    }
+})
+```
+
+### ImageMap
+```js
+lineClient.send({
+    channel: "line",
+    receiver: "<User id>",
+    message: {
+        type: "imageMap",
+        imageMap: {
+            image: "https://storage.googleapis.com/paas-storage/coupons",
+            description: "My Product",
+            width: <Image width (Max: 1040)>,
+            height: <Image height (Max: 1040)>,
+            actions: [
+                {
+                    type: "<Action type (uri, message)>",
+                    text?: "<Message text>",
+                    linkUri?: "<Http/Https url>"
+                    area: { x: <Location X>, y: <Location Y>, width: <Width>, height: <Height> }
+                },
+                ......
             ]
         }
     }

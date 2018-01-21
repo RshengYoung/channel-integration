@@ -1,5 +1,5 @@
 import { Parser } from '../interface'
-import { IntegrationMessage, TextMessage, ImageMessage, VideoMessage, AudioMessage, TemplateMessage, StickerMessage, LocationMessage } from '../model'
+import { IntegrationMessage, TextMessage, ImageMessage, VideoMessage, AudioMessage, TemplateMessage, StickerMessage, LocationMessage, ImageMapMessage } from '../model'
 export class LineParser implements Parser {
     constructor() { }
 
@@ -13,7 +13,7 @@ export class LineParser implements Parser {
             const imageMessage = integrationMessage.message as ImageMessage
             lineMessage.originalContentUrl = imageMessage.image
             lineMessage.previewImageUrl = imageMessage.image
-        } else if (messageType === "sticker") { 
+        } else if (messageType === "sticker") {
             const stickerMessage = integrationMessage.message as StickerMessage
             lineMessage.packageId = stickerMessage.sticker.packageId
             lineMessage.stickerId = stickerMessage.sticker.stickerId
@@ -23,7 +23,7 @@ export class LineParser implements Parser {
             lineMessage.address = locationMessag.location.address
             lineMessage.latitude = locationMessag.location.latitude
             lineMessage.longitude = locationMessag.location.longitude
-        }else if (messageType === "video") {
+        } else if (messageType === "video") {
             const videoMessage = integrationMessage.message as VideoMessage
             lineMessage.originalContentUrl = videoMessage.video.videoUrl
             lineMessage.previewImageUrl = videoMessage.video.previewImage
@@ -35,6 +35,12 @@ export class LineParser implements Parser {
             const templateMessage = integrationMessage.message as TemplateMessage
             lineMessage.altText = templateMessage.description
             lineMessage.template = templateMessage.template
+        } else if (messageType === "imagemap") {
+            const imageMapMessage = integrationMessage.message as ImageMapMessage
+            lineMessage.baseUrl = imageMapMessage.imageMap.image
+            lineMessage.altText = imageMapMessage.imageMap.description
+            lineMessage.baseSize = { width: imageMapMessage.imageMap.width, height: imageMapMessage.imageMap.height }
+            lineMessage.actions = imageMapMessage.imageMap.actions
         } else
             return Promise.reject("Error: It doesn't support the message type.")
         return Promise.resolve(lineMessage)
