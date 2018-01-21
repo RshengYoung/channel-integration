@@ -1,6 +1,8 @@
 🔸Wechat Client
 ===========
 
+> We will store wechat access token in cache. And refresh it every 7000 seconds.
+
 ## Initialize
 ```js
 const wechatClient = new WechatClient(CONFIG)
