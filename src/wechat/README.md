@@ -85,7 +85,7 @@ wechatClient.send({
                 url: "<Http/Https url>",
                 image: "<Image url>"
             },
-            ......
+            ...<Max: 8>
         ]
     }
 })

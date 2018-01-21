@@ -123,7 +123,7 @@ lineClient.send({
                     data?: "<Postback data>",
                     uri?: "<Http url>"
                 },
-                ....
+                ...<Max: 4>
             ]
         }
     }
@@ -143,7 +143,7 @@ lineClient.send({
             thumbnailImageUrl: "<Image url (https)>",
             title: "<Template title>",
             text: "<Template text>",
-            actions: [
+            actions: [  //  Must set 2 actions
                 {
                     type: "<Action type (postback, message, uri)>",
                     label: "<Button label>",
@@ -185,10 +185,10 @@ lineClient.send({
                             data?: "<Postback data>",
                             uri?: "<Http url>"
                         },
-                        ...
+                        ...<Max: 3>
                     ]
                 },
-                ..........
+                ...<Max: 10>
             ]
         }
     }
@@ -214,7 +214,7 @@ lineClient.send({
                     linkUri?: "<Http/Https url>"
                     area: { x: <Location X>, y: <Location Y>, width: <Width>, height: <Height> }
                 },
-                ......
+                ...<Max: 50>
             ]
         }
     }
