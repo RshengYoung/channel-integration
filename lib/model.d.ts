@@ -1,4 +1,4 @@
-import { TemplateContent } from '@line/bot-sdk';
+import { TemplateContent, ImageMapAction } from '@line/bot-sdk';
 export declare type Config = {
     id: string;
     secret: string;
@@ -8,7 +8,7 @@ export declare type Config = {
 export declare type IntegrationMessage = {
     channel: "line" | "wechat";
     receiver: string;
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | NewsMessage;
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage;
 };
 export declare type TextMessage = {
     type: "text";
@@ -54,6 +54,16 @@ export declare type TemplateMessage = {
     type: "template";
     description: string;
     template: TemplateContent;
+};
+export declare type ImageMapMessage = {
+    type: "imageMap";
+    imageMap: {
+        image: string;
+        description: string;
+        width: number;
+        height: number;
+        actions: ImageMapAction[];
+    };
 };
 export declare type NewsMessage = {
     type: "news";
