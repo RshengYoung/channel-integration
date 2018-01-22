@@ -5,7 +5,7 @@ import { WechatParser } from '../src/wechat/parser'
 import { Parser } from '../src/interface';
 import { IntegrationMessage } from '../src/model';
 
-describe("Wechat", () => {
+describe("WechatParser", () => {
     const parser: Parser = new WechatParser()
 
     it("Text Message format()", () => {
@@ -83,7 +83,7 @@ describe("Wechat", () => {
         })
     })
 
-    it("Template(news) Message format()", () => {
+    it("News Message format()", () => {
         const message: IntegrationMessage = {
             channel: "wechat",
             receiver: "oXFfsv1N3......",
