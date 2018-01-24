@@ -141,7 +141,7 @@ lineClient.send({
         template: {
             type: "confirm",
             description: "<Template description>",
-            buttons: [  //  Must set 2 actions
+            buttons: [  //  Must set 2 buttons
                 {
                     type: "<Action type (postback, message)>",
                     label: "<Button label>",
