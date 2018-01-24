@@ -21,7 +21,7 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 ```js
 const bot = require("push-integration")
 
-const lineClient = new bot.Client({
+const lineClient = new bot.LineClient({
     id: "<Channel id>",
     secret: "<Channel secret>",
     token: "<Channel access token>"
@@ -32,7 +32,7 @@ const clients = new bot.Client([lineClient])
 ## With TypeScript
 ```js
 import * as bot from 'push-integration'
-const lineClient = new bot.Client({
+const lineClient = new bot.LineClient({
     id: "<Channel id>",
     secret: "<Channel secret>",
     token: "<Channel access token>"
