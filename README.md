@@ -13,7 +13,7 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 |:--:|:--|
 |<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/line.png">|[Line](https://github.com/RshengYoung/channel-integration/blob/master/src/line)|
 |<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/Wechat.png">|[Wechat](https://github.com/RshengYoung/channel-integration/blob/master/src/wechat)|
-|<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/Messenger.png">|[Messenger](https://github.com/RshengYoung/channel-integration/blob/master/src/messenger)|
+|<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/messenger.png">|[Messenger](https://github.com/RshengYoung/channel-integration/blob/master/src/messenger)|
 
 # Example
 
