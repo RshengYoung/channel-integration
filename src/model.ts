@@ -1,4 +1,4 @@
-import { TemplateContent, TemplateButtons, TemplateConfirm, TemplateCarousel, TemplateImageCarousel, ImageMapAction } from '@line/bot-sdk'
+import { ImageMapAction } from '@line/bot-sdk'
 
 export type Config = {
     id: string
@@ -8,9 +8,9 @@ export type Config = {
 }
 
 export type IntegrationMessage = {
-    channel: "line" | "wechat"
+    channel: "line" | "wechat" | "messenger"
     receiver: string
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage
 }
 
 export type TextMessage = {
@@ -26,8 +26,8 @@ export type ImageMessage = {
 export type VideoMessage = {
     type: "video"
     video: {
-        title: string
-        description: string
+        title?: string
+        description?: string
         previewImage: string
         videoUrl: string
     }
@@ -37,7 +37,7 @@ export type AudioMessage = {
     type: "audio"
     audio: {
         audioUrl: string
-        duration: number
+        duration?: number
     }
 }
 
@@ -59,10 +59,15 @@ export type StickerMessage = {
     }
 }
 
+export type FileMessage = {
+    type: "file"
+    file: string
+}
+
 export type TemplateMessage = {
     type: "template"
     description: string
-    template: TemplateContent
+    template: Template//TemplateContent
 }
 
 export type ImageMapMessage = {
@@ -84,4 +89,101 @@ export type NewsMessage = {
         url: string
         image: string
     }[]
+}
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+export type Template = TemplateButton | TemplateConfirm | TemplateCarousel | TemplateImageCarousel
+
+export type TemplateButton = {
+    type: "button"
+    buttons: Button<{ label: string }>[]
+    title?: string                              //  Line
+    content: string
+    image?: string                              //  Line
+    imageAspectRatio?: "rectangle" | "square"   //  Line
+    imageSize?: "cover" | "contain"             //  Line
+    imageBackgroundColor?: string               //  Line
+}
+
+export type TemplateConfirm = {                 //  Line
+    type: "confirm"
+    content: string
+    buttons: [Button<{ label: string }>, Button<{ label: string }>]
+}
+
+export type TemplateCarousel = {
+    type: "carousel"
+    elements: CarouselElement[]
+    imageAspectRatio?: "rectangle" | "square"   //  Line
+    imageSize?: "cover" | "contain"             //  Line
+}
+
+export type TemplateImageCarousel = {
+    type: "imageCarousel"
+    elements: ImageElement[]
+}
+
+export type CarouselElement = {
+    image?: string                              //  Messenger require, Line -
+    title?: string                              //  Messenger require, Line -
+    imageAspectRatio?: "rectangle" | "square"   //  Line
+    imageBackgroundColor?: string               //  Line
+    content: string
+    buttons: Button<{ label: string }>[]
+    url?: string                                //  Messenger
+}
+
+export type ImageElement = {                     //  Line
+    image: string
+    action: Button<{ label?: string }>
+}
+
+//  Button
+export type Button<Label> = (
+    URLButton |
+    PostBackButton |
+    MessageButton |
+    DateTimeButton |
+    PhoneNumberButton | 
+    AccountLinkButton
+) & Label
+
+
+export type URLButton = {
+    type: "url"
+    url: string
+}
+
+export type PostBackButton = {
+    type: "postback"
+    data: string
+    text?: string
+}
+
+export type MessageButton = {                   //  Line
+    type: "message",
+    text: string
+}
+
+export type DateTimeButton = {                  //  Line
+    type: "dateTime"
+    date: string
+    mode: "date" | "time" | "datetime"
+    initial?: string
+    max?: string
+    min?: string
+}
+
+export type PhoneNumberButton = {               //  Messenger
+    type: "phoneNumber"
+    phone: string
+}
+
+export type AccountLinkButton = {            //  Messenger
+    type: "accountLink"
+    url: string
 }

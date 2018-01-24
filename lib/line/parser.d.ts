@@ -3,4 +3,6 @@ import { IntegrationMessage } from '../model';
 export declare class LineParser implements Parser {
     constructor();
     format(integrationMessage: IntegrationMessage): Promise<any>;
+    private addImageAction(button);
+    private addActions(buttons);
 }

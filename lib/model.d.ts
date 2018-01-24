@@ -1,4 +1,4 @@
-import { TemplateContent, ImageMapAction } from '@line/bot-sdk';
+import { ImageMapAction } from '@line/bot-sdk';
 export declare type Config = {
     id: string;
     secret: string;
@@ -6,9 +6,9 @@ export declare type Config = {
     callbackToken?: string;
 };
 export declare type IntegrationMessage = {
-    channel: "line" | "wechat";
+    channel: "line" | "wechat" | "messenger";
     receiver: string;
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage;
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage;
 };
 export declare type TextMessage = {
     type: "text";
@@ -21,8 +21,8 @@ export declare type ImageMessage = {
 export declare type VideoMessage = {
     type: "video";
     video: {
-        title: string;
-        description: string;
+        title?: string;
+        description?: string;
         previewImage: string;
         videoUrl: string;
     };
@@ -31,7 +31,7 @@ export declare type AudioMessage = {
     type: "audio";
     audio: {
         audioUrl: string;
-        duration: number;
+        duration?: number;
     };
 };
 export declare type LocationMessage = {
@@ -50,10 +50,14 @@ export declare type StickerMessage = {
         stickerId: string;
     };
 };
+export declare type FileMessage = {
+    type: "file";
+    file: string;
+};
 export declare type TemplateMessage = {
     type: "template";
     description: string;
-    template: TemplateContent;
+    template: Template;
 };
 export declare type ImageMapMessage = {
     type: "imageMap";
@@ -73,4 +77,83 @@ export declare type NewsMessage = {
         url: string;
         image: string;
     }[];
+};
+export declare type Template = TemplateButton | TemplateConfirm | TemplateCarousel | TemplateImageCarousel;
+export declare type TemplateButton = {
+    type: "button";
+    buttons: Button<{
+        label: string;
+    }>[];
+    title?: string;
+    content: string;
+    image?: string;
+    imageAspectRatio?: "rectangle" | "square";
+    imageSize?: "cover" | "contain";
+    imageBackgroundColor?: string;
+};
+export declare type TemplateConfirm = {
+    type: "confirm";
+    content: string;
+    buttons: [Button<{
+        label: string;
+    }>, Button<{
+        label: string;
+    }>];
+};
+export declare type TemplateCarousel = {
+    type: "carousel";
+    elements: CarouselElement[];
+    imageAspectRatio?: "rectangle" | "square";
+    imageSize?: "cover" | "contain";
+};
+export declare type TemplateImageCarousel = {
+    type: "imageCarousel";
+    elements: ImageElement[];
+};
+export declare type CarouselElement = {
+    image?: string;
+    title?: string;
+    imageAspectRatio?: "rectangle" | "square";
+    imageBackgroundColor?: string;
+    content: string;
+    buttons: Button<{
+        label: string;
+    }>[];
+    url?: string;
+};
+export declare type ImageElement = {
+    image: string;
+    action: Button<{
+        label?: string;
+    }>;
+};
+export declare type Button<Label> = (URLButton | PostBackButton | MessageButton | DateTimeButton | PhoneNumberButton | AccountLinkButton) & Label;
+export declare type URLButton = {
+    type: "url";
+    url: string;
+};
+export declare type PostBackButton = {
+    type: "postback";
+    data: string;
+    text?: string;
+};
+export declare type MessageButton = {
+    type: "message";
+    text: string;
+};
+export declare type DateTimeButton = {
+    type: "dateTime";
+    date: string;
+    mode: "date" | "time" | "datetime";
+    initial?: string;
+    max?: string;
+    min?: string;
+};
+export declare type PhoneNumberButton = {
+    type: "phoneNumber";
+    phone: string;
+};
+export declare type AccountLinkButton = {
+    type: "accountLink";
+    url: string;
 };

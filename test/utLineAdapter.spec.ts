@@ -1,11 +1,10 @@
 import { expect } from 'chai'
 import 'mocha'
 
-
 import { LINE } from '../config'
 import { LineClient } from '../src/line/adapter'
-import { Adapter } from '../src/interface';
-import { IntegrationMessage } from '../src/model';
+import { Adapter } from '../src/interface'
+import { IntegrationMessage } from '../src/model'
 
 describe("Line", () => {
     const line: Adapter = new LineClient(LINE)
@@ -19,9 +18,8 @@ describe("Line", () => {
                 text: "Text Message"
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send location", async () => {
@@ -38,9 +36,8 @@ describe("Line", () => {
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send sticker", async () => {
@@ -55,9 +52,8 @@ describe("Line", () => {
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send image", async () => {
@@ -69,9 +65,8 @@ describe("Line", () => {
                 image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send video", async () => {
@@ -88,9 +83,8 @@ describe("Line", () => {
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send audio", async () => {
@@ -118,14 +112,14 @@ describe("Line", () => {
                 type: "template",
                 description: "This is a buttons template",
                 template: {
-                    type: "buttons",
-                    thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
-                    imageAspectRatio: "square",
-                    imageSize: "cover",
-                    imageBackgroundColor: "#FFFFFF",
+                    type: "button",
+                    image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                    // imageAspectRatio: "square",
+                    // imageSize: "cover",
+                    // imageBackgroundColor: "#FFFFFF",
                     title: "Demo",
-                    text: "Please select",
-                    actions: [
+                    content: "Please select",
+                    buttons: [
                         {
                             type: "postback",
                             label: "B1",
@@ -138,17 +132,16 @@ describe("Line", () => {
                             text: "This is B2"
                         },
                         {
-                            type: "uri",
+                            type: "url",
                             label: "B3",
-                            uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+                            url: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
                         }
                     ]
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send template confirm", async () => {
@@ -160,8 +153,8 @@ describe("Line", () => {
                 description: "This is a confirm template",
                 template: {
                     type: "confirm",
-                    text: "Yes or no",
-                    actions: [
+                    content: "Yes or no",
+                    buttons: [
                         {
                             type: "message",
                             label: "Yes",
@@ -176,9 +169,8 @@ describe("Line", () => {
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send template carousel", async () => {
@@ -190,12 +182,12 @@ describe("Line", () => {
                 description: "This is a carousel template",
                 template: {
                     type: "carousel",
-                    columns: [
+                    elements: [
                         {
-                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                            image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
                             title: "this is menu1",
-                            text: "description1",
-                            actions: [
+                            content: "description1",
+                            buttons: [
                                 {
                                     type: "postback",
                                     label: "Buy1",
@@ -207,17 +199,17 @@ describe("Line", () => {
                                     text: "Message1"
                                 },
                                 {
-                                    type: "uri",
+                                    type: "url",
                                     label: "View detail1",
-                                    uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+                                    url: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
                                 }
                             ]
                         },
                         {
-                            thumbnailImageUrl: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                            image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
                             title: "this is menu2",
-                            text: "description2",
-                            actions: [
+                            content: "description2",
+                            buttons: [
                                 {
                                     type: "postback",
                                     label: "Buy2",
@@ -229,9 +221,9 @@ describe("Line", () => {
                                     text: "Message2"
                                 },
                                 {
-                                    type: "uri",
+                                    type: "url",
                                     label: "View detail2",
-                                    uri: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
+                                    url: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg"
                                 }
                             ]
                         }
@@ -239,9 +231,41 @@ describe("Line", () => {
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
+    })
+
+    it("Send template imageCarousel", async() => {
+        const message: IntegrationMessage = {
+            channel: "line",
+            receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
+            message: {
+                type: "template",
+                description: "This is a ImageCarousel template",
+                template: {
+                    type: "imageCarousel",
+                    elements: [
+                        {
+                            image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                            action: {
+                                type: "message",
+                                text: "Image 1"
+                            }
+                        },
+                        {
+                            image: "https://storage.googleapis.com/paas-storage/3-2_dress.jpg",
+                            action: {
+                                type: "postback",
+                                text: "Image 2",
+                                data: "data=image2"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
     it("Send ImageMap Message", async () => {
@@ -280,10 +304,8 @@ describe("Line", () => {
                 }
             }
         }
-        await line.send(message).then(response => {
-            expect(response.status).equal("ok")
-        })
-
+        const result = await line.send(message)
+        expect(result.status).equal("ok")
     })
 
 })

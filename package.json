@@ -1,6 +1,6 @@
 {
     "name": "push-integration",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "scripts": {
@@ -9,7 +9,9 @@
         "utLineAdapter": "mocha -r ts-node/register test/utLineAdapter.spec.ts",
         "utLineParser": "mocha -r ts-node/register test/utLineParser.spec.ts",
         "utWechatAdapter": "mocha -r ts-node/register test/utWechatAdapter.spec.ts",
-        "utWechatParser": "mocha -r ts-node/register test/utWechatParser.spec.ts"
+        "utWechatParser": "mocha -r ts-node/register test/utWechatParser.spec.ts",
+        "utMessengerParser": "mocha -r ts-node/register test/utMessengerParser.spec.ts",
+        "utMessengerAdapter": "mocha -r ts-node/register test/utMessengerAdapter.spec.ts"
     },
     "dependencies": {
         "@line/bot-sdk": "^5.2.0",

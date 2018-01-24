@@ -15,13 +15,11 @@ export class LineClient extends Adapter {
         this.parser = new LineParser()
     }
 
-    send(message: IntegrationMessage): Promise<any> {
-        return this.parser.format(message)
-            .then(lineMessages => {
-                return this.client.pushMessage(message.receiver, lineMessages)
-                    .then(() => Promise.resolve({ status: "ok" }))
-                    .catch(error => Promise.reject({ status: "error", message: error }))
-            })
+    async send(message: IntegrationMessage): Promise<any> {
+        const lineMessages = await this.parser.format(message)
+        return this.client.pushMessage(message.receiver, lineMessages)
+            .then(() => Promise.resolve({ status: "ok" }))
+            .catch(error => Promise.reject({ status: "error", message: error }))
     }
 
     serviceName(): string {
