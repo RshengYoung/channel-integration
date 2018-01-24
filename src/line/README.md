@@ -111,7 +111,7 @@ lineClient.send({
         type: "template",
         description: "<Message description>"
         template: {
-            type: "buttons",
+            type: "button",
             image: "<Image url (https)>",
             title: "<Template title>",
             content: "<Template text>",

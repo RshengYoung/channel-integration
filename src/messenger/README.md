@@ -79,7 +79,7 @@ messengerClient.send({
         type: "template",
         description: "<Message description>"
         template: {
-            type: "buttons",
+            type: "button",
             title: "<Template title>",
             content: "<Template text>",
             buttons: [
