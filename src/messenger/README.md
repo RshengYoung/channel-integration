@@ -25,38 +25,6 @@ messengerClient.send({
 })
 ```
 
-### Sticker
-```js
-messengerClient.send({
-    channel: "messenger",
-    receiver: "<User id>",
-    message: {
-        type: "sticker",
-        sticker: {
-            packageId: "<Package id>",
-            stickerId: "<Sticker id>"
-        }
-    }
-})
-```
-
-### Location
-```js
-messengerClient.send({
-    channel: "messenger",
-    receiver: "<User id>",
-    message: {
-        type: "location",
-        location: {
-            title: "<Location title>",
-            address: "<Location adress>",
-            latitude: <Location latitude>,
-            longitude: <Location longitude>
-        }
-    }
-})
-```
-
 ### Image
 ```js
 messengerClient.send({
