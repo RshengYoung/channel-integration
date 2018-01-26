@@ -84,7 +84,7 @@ messengerClient.send({
             content: "<Template text>",
             buttons: [
                 {
-                    type: "<Action type (postback, message, url)>",
+                    type: "<Action type (postback, url)>",
                     label: "<Button label>",
                     text?: "<Message text>",
                     data?: "<Postback data>",
@@ -114,7 +114,7 @@ messengerClient.send({
                     content: "<Column text>",
                     buttons: [
                         {
-                            type: "<Action type (postback, message, url)>",
+                            type: "<Action type (postback, url)>",
                             label: "<Button label>",
                             text?: "<Message text>",
                             data?: "<Postback data>",
