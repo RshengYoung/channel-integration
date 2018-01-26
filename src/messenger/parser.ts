@@ -1,6 +1,6 @@
 
 import { Parser } from '../interface'
-import { IntegrationMessage, TextMessage, ImageMessage, AudioMessage, VideoMessage, FileMessage, TemplateMessage, TemplateButton, Button, TemplateCarousel } from '../model';
+import { IntegrationMessage, TextMessage, ImageMessage, AudioMessage, VideoMessage, FileMessage, TemplateMessage, TemplateButton, Button, TemplateCarousel, QuickReplyMessage } from '../model';
 
 export class MessengerParser implements Parser {
     constructor() { }
@@ -46,6 +46,19 @@ export class MessengerParser implements Parser {
                     payload: { url: fileMessage.file }
                 }
             }
+        } else if (messageType === "quickreply") {
+            const quickReplyMessage = integrationMessage.message as QuickReplyMessage
+            messengerMessage.message = {
+                text: quickReplyMessage.title,
+                quick_replies: []
+            }
+            quickReplyMessage.elements.forEach(element => {
+                messengerMessage.message.quick_replies.push({
+                    content_type: element.type,
+                    title: element.label,
+                    payload: element.data
+                })
+            })
         } else if (messageType === "template") {
             const templateMessage = integrationMessage.message as TemplateMessage
             const templateType = templateMessage.template.type

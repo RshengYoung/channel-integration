@@ -8,7 +8,7 @@ export declare type Config = {
 export declare type IntegrationMessage = {
     channel: "line" | "wechat" | "messenger";
     receiver: string;
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage;
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage | QuickReplyMessage;
 };
 export declare type TextMessage = {
     type: "text";
@@ -53,6 +53,15 @@ export declare type StickerMessage = {
 export declare type FileMessage = {
     type: "file";
     file: string;
+};
+export declare type QuickReplyMessage = {
+    type: "quickReply";
+    title: string;
+    elements: {
+        type: "text";
+        label: string;
+        data: string;
+    }[];
 };
 export declare type TemplateMessage = {
     type: "template";

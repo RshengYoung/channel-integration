@@ -10,7 +10,7 @@ export type Config = {
 export type IntegrationMessage = {
     channel: "line" | "wechat" | "messenger"
     receiver: string
-    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage
+    message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage | QuickReplyMessage
 }
 
 export type TextMessage = {
@@ -62,6 +62,16 @@ export type StickerMessage = {
 export type FileMessage = {
     type: "file"
     file: string
+}
+
+export type QuickReplyMessage = {           //  Messenger
+    type: "quickReply"
+    title: string
+    elements: {
+        type: "text"
+        label: string                       //  title
+        data: string                        //  payload
+    }[]
 }
 
 export type TemplateMessage = {
@@ -148,7 +158,7 @@ export type Button<Label> = (
     PostBackButton |
     MessageButton |
     DateTimeButton |
-    PhoneNumberButton | 
+    PhoneNumberButton |
     AccountLinkButton
 ) & Label
 

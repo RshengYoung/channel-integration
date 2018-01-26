@@ -154,4 +154,29 @@ describe("Messenger", () => {
         expect(result.status).equal("ok")
     })
 
+    it("Send quickreply ", async () => {
+        const message:IntegrationMessage = {
+            channel: "messenger",
+            receiver: "1741223715936491",
+            message: {
+                type: "quickReply",
+                title: "What's your favorite movie genre?",
+                elements: [
+                    {
+                        type: "text",
+                        label: "Iron Man",
+                        data: "Iron Man"
+                    },
+                    {
+                        type: "text",
+                        label: "The Fast and the Furious",
+                        data: "The Fast and the Furious"
+                    }
+                ]
+            }
+        }
+        const result = await messenger.send(message)
+        expect(result.status).equal("ok")
+    })
+
 })

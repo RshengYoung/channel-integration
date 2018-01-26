@@ -73,7 +73,7 @@ describe("MessengerParser", () => {
         expect(messengerMessage.message.attachment.payload.url).equal("https://demo.audio.url/sample.mp3")
     })
 
-    it("File MEssage format()", async () => {
+    it("File Message format()", async () => {
         const message: IntegrationMessage = {
             channel: "messenger",
             receiver: "17412237......",
@@ -87,6 +87,29 @@ describe("MessengerParser", () => {
         expect(messengerMessage.message.attachment.type).equal("file")
         expect(messengerMessage.message.attachment.payload.url).equal("https://storage.googleapis.com/paas-storage/Channel%20Object.docx")
     })
+
+    // it("QuickReply Message format()", async () => {
+    //     const message:IntegrationMessage = {
+    //         channel: "messenger",
+    //         receiver: "17412237......",
+    //         message: {
+    //             type: "quickReply",
+    //             title: "What's your favorite movie genre?",
+    //             elements: [
+    //                 {
+    //                     type: "text",
+    //                     label: "Iron Man",
+    //                     data: "Iron Man"
+    //                 },
+    //                 {
+    //                     type: "text",
+    //                     label: "The Fast and the Furious",
+    //                     data: "The Fast and the Furious"
+    //                 }
+    //             ]
+    //         }
+    //     }
+    // })
 
     it("Buttons Template Message format()", async () => {
         const message: IntegrationMessage = {
