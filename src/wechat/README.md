@@ -9,9 +9,9 @@ const wechatClient = new WechatClient(CONFIG)
 ```
 
 ## Message Types
-|Text|Sticker|Location|Image|Audio|Video|Template|ImageMap|News|
-|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:------:|:--:|
-| ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ❌   |  ❌   | ✅ |
+|Text|Image|Audio|Video|News|
+|:--:|:---:|:---:|:---:|:--:|
+| ✅| ✅  | ✅ | ✅  |✅ |
 
 ## Send Message
 

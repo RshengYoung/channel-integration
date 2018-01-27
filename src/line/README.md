@@ -7,9 +7,9 @@ const lineClient = new LineClient(CONFIG)
 ```
 
 ## Message Types
-|Text|Sticker|Location|Image|Audio|Video|Template|ImageMap|News|
-|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:------:|:--:|
-| ✅ |  ✅  |   ✅  | ✅  | ✅ | ✅  |   ✅   |  ✅   | ❌|
+|Text|Sticker|Location|Image|Audio|Video|Template|ImageMap|
+|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:------:|
+| ✅ |  ✅  |   ✅  | ✅  | ✅ | ✅  |   ✅   |  ✅   |
 
 ## Send Message
 

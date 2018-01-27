@@ -7,9 +7,9 @@ const messengerClient = new messengerClient(CONFIG)
 ```
 
 ## Message Types
-|Text|Sticker|Location|Image|Audio|Video|Template|ImageMap|News|
-|:--:|:-----:|:------:|:---:|:---:|:---:|:------:|:------:|:--:|
-| ✅ |  ❌  |   ❌  | ✅  | ✅ | ✅  |   ✅   |  ❌   | ❌|
+|Text|Image|Audio|Video|File|Template|QuickReply|TypingOn/Off|
+|:--:|:---:|:---:|:---:|:--:|:------:|:--------:|:----------:|
+| ✅ | ✅  | ✅ | ✅ | ✅ |   ✅  |    ✅   |     ✅     |
 
 ## Send Message
 
