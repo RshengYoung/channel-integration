@@ -121,11 +121,11 @@ describe("Messenger", () => {
                                     label: "Buy1",
                                     data: "action=buy&itemid=111"
                                 },
-                                {
-                                    type: "phoneNumber",
-                                    label: "Call Me",
-                                    phone: "+886912345678"
-                                }
+                                // {
+                                //     type: "phoneNumber",
+                                //     label: "Call Me",
+                                //     phone: "+886912345678"
+                                // }
                             ]
                         },
                         {
@@ -139,11 +139,11 @@ describe("Messenger", () => {
                                     label: "Buy2",
                                     data: "action=buy&itemid=111"
                                 },
-                                {
-                                    type: "phoneNumber",
-                                    label: "Call Me",
-                                    phone: "+886912345678"
-                                }
+                                // {
+                                //     type: "phoneNumber",
+                                //     label: "Call Me",
+                                //     phone: "+886912345678"
+                                // }
                             ]
                         }
                     ]
@@ -155,7 +155,7 @@ describe("Messenger", () => {
     })
 
     it("Send quickreply ", async () => {
-        const message:IntegrationMessage = {
+        const message: IntegrationMessage = {
             channel: "messenger",
             receiver: "1741223715936491",
             message: {
@@ -173,6 +173,19 @@ describe("Messenger", () => {
                         data: "The Fast and the Furious"
                     }
                 ]
+            }
+        }
+        const result = await messenger.send(message)
+        expect(result.status).equal("ok")
+    })
+
+    it("Send TypingOn", async () => {
+        const message: IntegrationMessage = {
+            channel: "messenger",
+            receiver: "1741223715936491",
+            message: {
+                type: "typing",
+                state: "on"
             }
         }
         const result = await messenger.send(message)

@@ -1,6 +1,6 @@
 
 import { Parser } from '../interface'
-import { IntegrationMessage, TextMessage, ImageMessage, AudioMessage, VideoMessage, FileMessage, TemplateMessage, TemplateButton, Button, TemplateCarousel, QuickReplyMessage } from '../model';
+import { IntegrationMessage, TextMessage, ImageMessage, AudioMessage, VideoMessage, FileMessage, TemplateMessage, TemplateButton, Button, TemplateCarousel, QuickReplyMessage, TypingMessage } from '../model';
 
 export class MessengerParser implements Parser {
     constructor() { }
@@ -59,6 +59,12 @@ export class MessengerParser implements Parser {
                     payload: element.data
                 })
             })
+        } else if (messageType === "typing") {
+            const typingMessage = integrationMessage.message as TypingMessage
+            messengerMessage = {
+                recipient: { id: integrationMessage.receiver },
+                sender_action: `typing_${typingMessage.state}`
+            }
         } else if (messageType === "template") {
             const templateMessage = integrationMessage.message as TemplateMessage
             const templateType = templateMessage.template.type

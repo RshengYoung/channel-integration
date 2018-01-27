@@ -129,3 +129,35 @@ messengerClient.send({
     }
 })
 ```
+
+### QuickReply
+```js
+messengerClient.send({
+    channel: "messenger",
+    receiver: "<User id>",
+    message: {
+        type: "quickReply",
+        title: "<Discription>",
+        elements: [
+            {
+                type: "text",
+                label: "<Label>",
+                data: "<Payload data>"
+            },
+            ......
+        ]
+    }
+})
+```
+
+### TypingOn/Off
+```js
+messengerClient.send({
+    channel: "messenger",
+    receiver: "<User id>",
+    message: {
+        type: "typing",
+        state: "<on / off>"
+    }
+})
+```
