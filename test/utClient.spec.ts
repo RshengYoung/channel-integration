@@ -9,13 +9,18 @@ import { LINE, WECHAT } from '../config'
 import { WechatClient } from '../src/wechat/adapter';
 
 describe("Client", () => {
-    const line: Adapter = new LineClient(LINE)
-    const wechat: Adapter = new WechatClient(WECHAT)
+    const line: Adapter = new LineClient(LINE, "testLine")
+    const wechat: Adapter = new WechatClient(WECHAT, "testWechat")
     const client: Client = new Client([line, wechat])
+
+    it("Service Name", () => {
+        expect(line.getServiceName()).equal("testLine")
+        expect(wechat.getServiceName()).equal("testWechat")
+    })
 
     it("Client send Line message", async () => {
         const message: IntegrationMessage = {
-            channel: "line",
+            channel: "testLine",
             receiver: "U40ed24268853ce00d70c4dd5e7b35ea9",
             message: {
                 type: "text",
@@ -28,7 +33,7 @@ describe("Client", () => {
 
     it("Client send Wechat message", async () => {
         const message: IntegrationMessage = {
-            channel: "wechat",
+            channel: "testWechat",
             receiver: "oXFfsv1N3Rfa5Cj0glsZTWUEjpYQ",
             message: {
                 type: "text",
