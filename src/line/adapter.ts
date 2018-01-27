@@ -6,8 +6,8 @@ import { Config, IntegrationMessage } from '../model'
 
 export class LineClient extends Adapter {
     private client: Client
-    constructor(config: Config) {
-        super(config)
+    constructor(config: Config, serviceName?: string) {
+        super(config, serviceName || "line")
         this.client = new Client({
             channelSecret: config.secret,
             channelAccessToken: config.accessToken
@@ -22,7 +22,7 @@ export class LineClient extends Adapter {
             .catch(error => Promise.reject({ status: "error", message: error }))
     }
 
-    serviceName(): string {
-        return "line"
-    }
+    // serviceName(): string {
+    //     return "line"
+    // }
 }

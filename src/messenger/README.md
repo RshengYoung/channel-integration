@@ -3,7 +3,7 @@
 
 ## Initialize
 ```js
-const messengerClient = new messengerClient(CONFIG)
+const messengerClient = new messengerClient(CONFIG, "messenger")
 ```
 
 ## Message Types

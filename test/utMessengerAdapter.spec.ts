@@ -7,11 +7,11 @@ import { Adapter } from '../src/interface'
 import { IntegrationMessage } from '../src/model'
 
 describe("Messenger", () => {
-    const messenger: Adapter = new MessengerClient(MESSENGER)
+    const messenger: Adapter = new MessengerClient(MESSENGER, "messengerTest")
 
     it("Send text", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "text",
@@ -20,11 +20,11 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
     it("Send image", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "image",
@@ -33,11 +33,11 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
     it("Send video", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "video",
@@ -53,7 +53,7 @@ describe("Messenger", () => {
 
     it("Send audio", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "audio",
@@ -62,11 +62,11 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
     it("Send template button", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "template",
@@ -98,11 +98,11 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
     it("Send template carousel", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "template",
@@ -152,11 +152,11 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
     it("Send quickreply ", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "quickReply",
@@ -177,11 +177,11 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
     it("Send TypingOn", async () => {
         const message: IntegrationMessage = {
-            channel: "messenger",
+            channel: "messengerTest",
             receiver: "1741223715936491",
             message: {
                 type: "typing",
@@ -190,6 +190,6 @@ describe("Messenger", () => {
         }
         const result = await messenger.send(message)
         expect(result.status).equal("ok")
-    })
+    }).timeout(5000)
 
 })

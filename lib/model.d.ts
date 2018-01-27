@@ -6,7 +6,7 @@ export declare type Config = {
     callbackToken?: string;
 };
 export declare type IntegrationMessage = {
-    channel: "line" | "wechat" | "messenger";
+    channel: string;
     receiver: string;
     message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage | QuickReplyMessage | TypingMessage;
 };

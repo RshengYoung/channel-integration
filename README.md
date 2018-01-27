@@ -25,18 +25,18 @@ const lineClient = new bot.LineClient({
     id: "<Channel id>",
     secret: "<Channel secret>",
     token: "<Channel access token>"
-})
+}, "<Channel name>")
 const clients = new bot.Client([lineClient])
 ```
 
 ## With TypeScript
 ```js
-import * as bot from 'push-integration'
+import * as bot from "push-integration"
 const lineClient = new bot.LineClient({
     id: "<Channel id>",
     secret: "<Channel secret>",
     token: "<Channel access token>"
-})
+}, "<Channel name>")
 const clients = new bot.Client([lineClient])
 ```
 or
@@ -46,13 +46,13 @@ const lineClient = new Client({
     id: "<Channel id>",
     secret: "<Channel secret>",
     token: "<Channel access token>"
-})
+}, "<Channel name>")
 const clients = new Client([lineClient])
 ```
 
 ### Add new Channel
 ```js
-const wechatClient = new WechatClient(CONFIG)
+const wechatClient = new WechatClient(CONFIG, "<Channel name>")
 clients.use(wechatClient)
 ```
 

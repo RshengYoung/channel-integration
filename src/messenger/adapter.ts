@@ -7,8 +7,8 @@ import { Config, IntegrationMessage } from '../model'
 export class MessengerClient extends Adapter {
     private sendMessageUrl: string = "https://graph.facebook.com/v2.6/me/messages?"
 
-    constructor(config: Config) {
-        super(config)
+    constructor(config: Config, serviceName?: string) {
+        super(config, serviceName || "messenger")
         this.parser = new MessengerParser()
     }
 
@@ -24,7 +24,7 @@ export class MessengerClient extends Adapter {
             .catch(error => Promise.reject({ status: "error", message: error }))
     }
 
-    serviceName(): string {
-        return "messenger"
-    }
+    // serviceName(): string {
+    //     return "messenger"
+    // }
 }

@@ -8,7 +8,7 @@ export type Config = {
 }
 
 export type IntegrationMessage = {
-    channel: "line" | "wechat" | "messenger"
+    channel: string//"line" | "wechat" | "messenger"
     receiver: string
     message: TextMessage | ImageMessage | VideoMessage | AudioMessage | FileMessage | LocationMessage | StickerMessage | TemplateMessage | ImageMapMessage | NewsMessage | QuickReplyMessage | TypingMessage
 }
@@ -77,7 +77,7 @@ export type QuickReplyMessage = {           //  Messenger
 export type TypingMessage = {             //  messenger
     type: "typing"
     state: "on" | "off"
-}   
+}
 
 export type TemplateMessage = {
     type: "template"

@@ -3,7 +3,7 @@
 
 ## Initialize
 ```js
-const lineClient = new LineClient(CONFIG)
+const lineClient = new LineClient(CONFIG, "line")
 ```
 
 ## Message Types

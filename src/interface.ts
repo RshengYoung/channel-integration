@@ -4,13 +4,16 @@ import { IntegrationMessage, Config } from './model'
 export abstract class Adapter {
     protected config: Config
     protected parser: Parser
+    protected serviceName: string
 
-    constructor(config: Config) {
+    constructor(config: Config, serviceName: string) {
         this.config = config
+        this.serviceName = serviceName
     }
 
     abstract send(message: IntegrationMessage): Promise<any>
-    abstract serviceName(): string
+    // abstract serviceName(): string
+    getServiceName(): string { return this.serviceName }
 }
 
 export interface Parser {

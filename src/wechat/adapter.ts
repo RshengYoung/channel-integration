@@ -16,8 +16,8 @@ export class WechatClient extends Adapter {
     private sendMessageUrl = this.wechatUrl + "/message/custom/send?"
     private uploadMediaUrl = this.wechatUrl + "/media/upload?"
 
-    constructor(config: Config) {
-        super(config)
+    constructor(config: Config, serviceName?: string) {
+        super(config, serviceName || "wechat")
         this.parser = new WechatParser()
         this.cache = new Cache({ stdTTL: 7000, checkperiod: 0 })
     }
@@ -32,9 +32,9 @@ export class WechatClient extends Adapter {
             .catch(error => Promise.reject({ status: "error", message: error }))
     }
 
-    serviceName(): string {
-        return "wechat"
-    }
+    // serviceName(): string {
+    //     return "wechat"
+    // }
 
     async uploadMedia(type: "image" | "voice" | "video" | "thumb", mediaUrl: string): Promise<string> {
         const split = mediaUrl.split(".")
