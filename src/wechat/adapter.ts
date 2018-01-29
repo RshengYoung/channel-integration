@@ -15,11 +15,13 @@ export class WechatClient extends Adapter {
     private getTokenUrl: string = this.wechatUrl + "/token?"
     private sendMessageUrl = this.wechatUrl + "/message/custom/send?"
     private uploadMediaUrl = this.wechatUrl + "/media/upload?"
+    private sessionId: string
 
     constructor(config: Config, serviceName?: string) {
         super(config, serviceName || "wechat")
         this.parser = new WechatParser()
         this.cache = new Cache({ stdTTL: 7000, checkperiod: 0 })
+        this.sessionId = uuid.v4()
     }
 
     async send(message: IntegrationMessage): Promise<any> {
@@ -64,12 +66,12 @@ export class WechatClient extends Adapter {
 
     private getAccessToken(): Promise<string> {
         const url = `${this.getTokenUrl}grant_type=client_credential&appid=${this.config.id}&secret=${this.config.secret}`
-        const token = this.cache.get(this.config.id) as string
+        const token = this.cache.get(this.sessionId) as string
         if (token)
             return Promise.resolve(token as string)
         return axios.get(url).then(result => {
             const accessToken = result.data.access_token as string
-            this.cache.set(this.config.id, accessToken)
+            this.cache.set(this.sessionId, accessToken)
             return Promise.resolve(accessToken)
         })
     }

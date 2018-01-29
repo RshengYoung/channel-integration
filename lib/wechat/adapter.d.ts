@@ -6,6 +6,7 @@ export declare class WechatClient extends Adapter {
     private getTokenUrl;
     private sendMessageUrl;
     private uploadMediaUrl;
+    private sessionId;
     constructor(config: Config, serviceName?: string);
     send(message: IntegrationMessage): Promise<any>;
     uploadMedia(type: "image" | "voice" | "video" | "thumb", mediaUrl: string): Promise<string>;
