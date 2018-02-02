@@ -11,9 +11,9 @@ $ npm install --save https://github.com/RshengYoung/channel-integration.git
 
 |⭐|Platform|
 |:--:|:--|
-|<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/line.png">|[Line](https://github.com/RshengYoung/channel-integration/blob/master/src/line)|
-|<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/messenger.png">|[Messenger](https://github.com/RshengYoung/channel-integration/blob/master/src/messenger)|
-|<img width="35" src="http://www.broid.ai/dist/assets/images/github/integrations/Wechat.png">|[Wechat](https://github.com/RshengYoung/channel-integration/blob/master/src/wechat)|
+|<img width="35" src="https://lh3.googleusercontent.com/l-ZZOFGyeKYz3stUbxTECHYnXcRD66C9g0tjiWA_okVIxZyb0E7_esU8LRpq_0LFCu8Y=w300">|[Line](https://github.com/RshengYoung/channel-integration/blob/master/src/line)|
+|<img width="35" src="https://s3.amazonaws.com/ionic-marketplace/facebook-messenger-clone/icon.png">|[Messenger](https://github.com/RshengYoung/channel-integration/blob/master/src/messenger)|
+|<img width="35" src="https://www.galaxymacau.com/uploads/media/pages/wechat/wechat.jpg">|[Wechat](https://github.com/RshengYoung/channel-integration/blob/master/src/wechat)|
 
 # Example
 
