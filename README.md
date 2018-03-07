@@ -4,7 +4,7 @@
 # Install
 Using npm
 ```sh
-$ npm install --save https://github.com/RshengYoung/channel-integration.git
+$ npm install --save channel-integration.git
 ```
 
 # Supports
