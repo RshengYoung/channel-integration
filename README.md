@@ -4,7 +4,7 @@
 # Install
 Using npm
 ```sh
-$ npm install --save channel-integration.git
+$ npm install --save push-integration
 ```
 
 # Supports
